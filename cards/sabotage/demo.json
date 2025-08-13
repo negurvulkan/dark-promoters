@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_demo",
+  "name": {
+    "en": "Demo Sabotage",
+    "de": "Demo-Sabotage"
+  },
+  "text": {
+    "en": "-10 audience",
+    "de": "-10 Publikum"
+  },
+  "style": {
+    "color": "#ff00ff"
+  }
+}

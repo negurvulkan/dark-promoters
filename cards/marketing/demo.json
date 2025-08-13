@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_demo",
+  "name": {
+    "en": "Demo Marketing",
+    "de": "Demo-Marketing"
+  },
+  "cost": 300,
+  "audience_pct": 0.05,
+  "style": {
+    "color": "#ffff00"
+  }
+}

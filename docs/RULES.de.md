@@ -3,6 +3,8 @@
 > Ein kompetitives Event-Management-Kartenspiel in der Gothic/Alt-Szene.  
 > Alle Events finden am **gleichen Tag** statt – ihr konkurriert um Locations, Acts, Sponsoren, Marketing und Publikum.
 
+Beispielkarten liegen unter `/cards`, ein Demo-Starterdeck unter `/starter_decks`. Die englische Version befindet sich in `../RULES.md`.
+
 ## 0) Ziel & Setup
 - **Ziel:** Höchster **Gewinn** gewinnt. Bei Gleichstand: höchste **Zuschauerzahl**, danach **geringste Gesamtausgaben**.
 - **Setup:** Pro **Modus** (siehe §8) gelten Startbudget, Zuschauer-Basis und Ticketpreis-Bänder.

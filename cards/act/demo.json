@@ -6,6 +6,8 @@
     "en": "Demo Act",
     "de": "Demo-Auftritt"
   },
+  "cost": 5000,
+  "audience_pct": 0.1,
   "style": {
     "color": "#ff0000"
   }

@@ -1,7 +1,7 @@
 # NRW Noir — Dark Promoters (TCG prototype)
 
 A lightweight, extensible **virtual trading card game** about organizing gothic/alt-scene events in NRW.  
-Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. All events happen **on the same day**.
+Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. All events happen **on the same day**. Sample cards live in `/cards` and a demo starter deck is in `/starter_decks`.
 
 - **Stack:** PHP 8 + MySQL/MariaDB + HTML/CSS + vanilla JS (no frameworks)
 - **Cards as JSON files:** one file **per card** for drop-in extensibility
@@ -15,25 +15,18 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 4. Serve repo root via `php -S localhost:8080` (or your web server).
 5. Open `http://localhost:8080`.
 
+For detailed onboarding steps see `docs/ONBOARDING.md`.
+
 ## Repository Layout (proposed)
 
-/api/ # PHP endpoints (state, actions, cards loader, SSE)
-/cards/ # one JSON per card
-/core/
-/act/ # e.g. act_velvet_kain.json
-/sponsor/ # e.g. sponsor_noirwear.json
-/location/ # e.g. loc_matrix_bochum.json
-/marketing/
-/sabotage/
-/club/ # mode packs (Clubnight)
-/party/
-/festival1/ # 1-day festival
-/festival2/ # 2-day festival
-/frames/ # frame JSON + frame/overlay/texture assets
-/images/ # art, icons, textures
-/i18n/ # ui.en.json, ui.de.json (UI strings)
-/public/ # index.html, cards.css, app.js
-/docs/ # RULES.md (this repo), RULES.de.md (later), AGENTS.md
+/api/          # PHP endpoints (state, actions, cards loader, SSE)
+/cards/        # one JSON per card
+/starter_decks/# sample starter decks
+/i18n/        # ui.en.json, ui.de.json (UI strings)
+/public/       # index.html, cards.css, app.js
+/docs/         # RULES.md (EN), RULES.de.md (DE), ONBOARDING.md, CONTRIBUTING.md, AGENTS.md
+/migrations/   # SQL schema migrations
+/rulesets/     # versioned ruleset JSON
 
 
 ## Card Files (one JSON per card)
@@ -134,6 +127,7 @@ Building/Running
 Contributing
 
     See AGENTS.md for roles, tasks, and acceptance criteria.
+    See `docs/CONTRIBUTING.md` for guidelines.
 
     Lint JSON (UTF-8, no BOM). Keep schema = 1 for now.
 

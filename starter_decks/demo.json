@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "id": "deck_demo",
+  "name": {
+    "en": "Demo Deck",
+    "de": "Demo-Deck"
+  },
+  "cards": [
+    "act_demo",
+    "loc_demo",
+    "sponsor_demo",
+    "marketing_demo",
+    "sabotage_demo"
+  ]
+}

@@ -3,6 +3,8 @@
 > A competitive event-management card game set in the gothic/alt scene.  
 > All events happen on the **same day** — compete for Locations, Acts, Sponsors, Marketing, and Audience.
 
+Sample cards live in `/cards`, and a demo starter deck is in `/starter_decks`. A German translation is available in `docs/RULES.de.md`.
+
 ## 0) Objective & Setup
 - **Goal:** Highest **Profit** wins. Tie → most **Audience**, then lowest **Total Spend**.
 - **Start:** Each player gets **starting budget**, **audience base**, and **ticket price band options** per chosen **Mode** (see §8).

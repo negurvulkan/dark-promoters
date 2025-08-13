@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_demo",
+  "name": {
+    "en": "Demo Location",
+    "de": "Demo-Location"
+  },
+  "rent": 1000,
+  "capacity": 200,
+  "style": {
+    "color": "#00ff00"
+  }
+}
