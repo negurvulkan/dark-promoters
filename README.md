@@ -10,7 +10,7 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 
 ## Quick Start (dev)
 1. PHP 8 + MySQL/MariaDB installed.
-2. Create DB tables (see `docs/db.sql` once added).
+2. Create DB tables: run migrations in `/migrations` (`001_initial.sql` then `002_add_password_hash.sql`).
 3. Configure `config.php` (DB creds).
 4. Serve repo root via `php -S localhost:8080` (or your web server).
 5. Open `http://localhost:8080`.
@@ -86,6 +86,12 @@ Example (frame JSON):
 
 Backend: simple API
 
+    POST /api/register.php → {username, password} → create user
+
+    POST /api/login.php → {username, password} → returns session_token
+
+    POST /api/logout.php → Authorization or {session_token} → invalidate session
+
     GET /api/cards.php → loads/merges all card JSONs (recursive scan + APCu/ETag caching)
 
     GET /api/state.php?game_id=… → filtered game state (no peeking at other hands)
@@ -93,6 +99,8 @@ Backend: simple API
     POST /api/act.php → {action, payload, client_version} (server validates rules/phase)
 
     Optional: GET /api/stream.php?game_id=… → SSE push updates
+
+Session tokens are stored in the `sessions` table with an expiry and returned by `/api/login.php`. Clients persist the token (e.g., `localStorage`) and send it on requests via `Authorization: Bearer <token>` or a `session_token` parameter. `/api/logout.php` deletes the token. Ensure migrations `001_initial.sql` and `002_add_password_hash.sql` are applied before using these endpoints.
 
 Game state is stored as JSON in the DB for quick iteration (games.state_json, versioned).
 Internationalization (EN/DE)
