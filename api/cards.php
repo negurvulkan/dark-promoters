@@ -27,7 +27,7 @@ foreach ($iterator as $file) {
         continue;
     }
     $missing = [];
-    foreach (['schema', 'type', 'id', 'name'] as $field) {
+    foreach (['schema', 'type', 'id'] as $field) {
         if (!array_key_exists($field, $data)) {
             $missing[] = $field;
         }
@@ -36,14 +36,24 @@ foreach ($iterator as $file) {
         $warnings[] = sprintf('Card %s missing fields: %s', $path, implode(', ', $missing));
         continue;
     }
+
+    if (!isset($data['name']) && !isset($data['name_key'])) {
+        $warnings[] = sprintf('Card %s missing fields: name or name_key', $path);
+        continue;
+    }
     // Validate i18n fields for strings like name
-    if (is_array($data['name'])) {
-        if (!isset($data['name']['en']) || !isset($data['name']['de'])) {
-            $warnings[] = sprintf('Card %s has invalid i18n name', $path);
+    if (isset($data['name'])) {
+        if (is_array($data['name'])) {
+            if (!isset($data['name']['en']) || !isset($data['name']['de'])) {
+                $warnings[] = sprintf('Card %s has invalid i18n name', $path);
+                continue;
+            }
+        } elseif (!is_string($data['name'])) {
+            $warnings[] = sprintf('Card %s has invalid name', $path);
             continue;
         }
-    } elseif (!is_string($data['name'])) {
-        $warnings[] = sprintf('Card %s has invalid name', $path);
+    } elseif (isset($data['name_key']) && !is_string($data['name_key'])) {
+        $warnings[] = sprintf('Card %s has invalid name_key', $path);
         continue;
     }
     if (isset($data['style']) && !is_array($data['style'])) {
