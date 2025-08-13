@@ -22,5 +22,12 @@
   "type_sponsor": "Sponsor",
   "type_location": "Ort",
   "type_marketing": "Marketing",
-  "type_sabotage": "Sabotage"
+  "type_sabotage": "Sabotage",
+  "market_title": "Markt",
+  "points_label": "Punkte:",
+  "pack_id_header": "Pack-ID",
+  "cost_header": "Kosten",
+  "buy_header": "Kaufen",
+  "buy_button": "Kaufen",
+  "purchase_failed": "Kauf fehlgeschlagen"
 }

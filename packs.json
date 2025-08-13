@@ -1,0 +1,20 @@
+[
+  {
+    "id": "starter_pack",
+    "type": "starter",
+    "cost": 100,
+    "contents": [
+      {"card_type": "act", "qty": 3},
+      {"card_type": "location", "qty": 2}
+    ]
+  },
+  {
+    "id": "pro_pack",
+    "type": "pro",
+    "cost": 500,
+    "contents": [
+      {"card_type": "act", "qty": 5},
+      {"card_type": "sponsor", "qty": 1}
+    ]
+  }
+]
