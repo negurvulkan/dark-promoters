@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_demo",
+  "name": {
+    "en": "Demo Act",
+    "de": "Demo-Auftritt"
+  },
+  "style": {
+    "color": "#ff0000"
+  }
+}
