@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_demo",
+  "name": {
+    "en": "Demo Sponsor",
+    "de": "Demo-Sponsor"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 500,
+  "style": {
+    "color": "#0000ff"
+  }
+}
