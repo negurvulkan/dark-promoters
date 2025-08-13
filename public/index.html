@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lobby</title>
+  <title>Card Viewer</title>
+  <link rel="stylesheet" href="cards.css">
 </head>
 <body>
-  <h1>Lobby</h1>
-  <button id="logout_btn">Logout</button>
-  <script src="auth.js"></script>
+  <header>
+    <label for="lang-switch">Language:</label>
+    <select id="lang-switch">
+      <option value="en" selected>EN</option>
+      <option value="de">DE</option>
+    </select>
+  </header>
+  <main id="card-container" class="card-grid"></main>
+  <script src="app.js"></script>
 </body>
 </html>
