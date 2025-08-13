@@ -1,1 +1,136 @@
-# dark-promoters
+# NRW Noir — Dark Promoters (TCG prototype)
+
+A lightweight, extensible **virtual trading card game** about organizing gothic/alt-scene events in NRW.  
+Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. All events happen **on the same day**.
+
+- **Stack:** PHP 8 + MySQL/MariaDB + HTML/CSS + vanilla JS (no frameworks)
+- **Cards as JSON files:** one file **per card** for drop-in extensibility
+- **Multilingual from the start:** **English + German** (UI + cards)
+- **Target:** fast prototyping, easy rules iteration, printable assets later
+
+## Quick Start (dev)
+1. PHP 8 + MySQL/MariaDB installed.
+2. Create DB tables (see `docs/db.sql` once added).
+3. Configure `config.php` (DB creds).
+4. Serve repo root via `php -S localhost:8080` (or your web server).
+5. Open `http://localhost:8080`.
+
+## Repository Layout (proposed)
+
+/api/ # PHP endpoints (state, actions, cards loader, SSE)
+/cards/ # one JSON per card
+/core/
+/act/ # e.g. act_velvet_kain.json
+/sponsor/ # e.g. sponsor_noirwear.json
+/location/ # e.g. loc_matrix_bochum.json
+/marketing/
+/sabotage/
+/club/ # mode packs (Clubnight)
+/party/
+/festival1/ # 1-day festival
+/festival2/ # 2-day festival
+/frames/ # frame JSON + frame/overlay/texture assets
+/images/ # art, icons, textures
+/i18n/ # ui.en.json, ui.de.json (UI strings)
+/public/ # index.html, cards.css, app.js
+/docs/ # RULES.md (this repo), RULES.de.md (later), AGENTS.md
+
+
+## Card Files (one JSON per card)
+- Minimal fields: `schema`, `type`, `id`, `name`, plus type-specific gameplay fields.
+- Optional `style` block for frame/background/art/rarity.
+- **Localization on cards:** either `name` & `text` as objects (`{"en":"…","de":"…"}`) **or** `name_key` + UI i18n. **We default to embedded objects** for cards.
+
+**Example (Act):**
+
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_velvet_kain",
+  "name": {"en": "Velvet Kain", "de": "Velvet Kain"},
+  "cost": 12000,
+  "audience_pct": 0.65,
+  "style": {
+    "frame_id": "frame_act_dark",
+    "art_uri": "images/art/velvet_kain.webp",
+    "rarity": "rare",
+    "badge": {"en":"Headliner","de":"Headliner"}
+  },
+  "tags": ["core","F1","F2","L"]  // set/mode/size tags
+}
+
+Frames
+
+Frames are reusable style presets (per type). Cards reference them via style.frame_id.
+
+Example (frame JSON):
+
+{
+  "id": "frame_act_dark",
+  "type": "act",
+  "name": "Act – Dark",
+  "frame_uri": "images/frames/act_dark_base.webp",
+  "overlay_uri": "images/frames/act_gloss.webp",
+  "bg_texture_uri": "images/textures/paper_dark.webp",
+  "palette": {
+    "title_bg": "#121118",
+    "type_bg": "#0d0c12",
+    "rules_bg": "#0a0a0f",
+    "text": "#eae7ff",
+    "muted": "#c7c3e6"
+  },
+  "icon_tint": "#b3a6ff",
+  "title_font": "Cinzel",
+  "rules_font": "Inter"
+}
+
+Backend: simple API
+
+    GET /api/cards.php → loads/merges all card JSONs (recursive scan + APCu/ETag caching)
+
+    GET /api/state.php?game_id=… → filtered game state (no peeking at other hands)
+
+    POST /api/act.php → {action, payload, client_version} (server validates rules/phase)
+
+    Optional: GET /api/stream.php?game_id=… → SSE push updates
+
+Game state is stored as JSON in the DB for quick iteration (games.state_json, versioned).
+Internationalization (EN/DE)
+
+    UI strings: /i18n/ui.en.json, /i18n/ui.de.json
+
+    Card strings: embedded per card (name/en,de, optional rules/en,de), fallback to EN.
+
+    Locale detection: ?lang=en|de or navigator language, with user override (cookie).
+
+UI i18n example:
+
+{
+  "app_title": "Dark Promoters",
+  "phase_finance": "Finance",
+  "phase_location": "Location",
+  "phase_booking": "Booking",
+  "phase_marketing": "Marketing",
+  "phase_sabotage": "Sabotage",
+  "event_phase": "Event (Scoring)"
+}
+
+Building/Running
+
+    No build step required.
+
+    Recommended: enable APCu for faster card manifests.
+
+    Images: prefer WEBP for art; SVG for icons.
+
+Contributing
+
+    See AGENTS.md for roles, tasks, and acceptance criteria.
+
+    Lint JSON (UTF-8, no BOM). Keep schema = 1 for now.
+
+    IDs: type_prefix_snake_case (e.g., act_velvet_kain, loc_matrix_bochum).
+
+License
+
+TBD (add SPDX in headers when chosen).
