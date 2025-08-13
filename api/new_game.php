@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/_ruleset.php';
+
 header('Content-Type: application/json');
 
 $input = json_decode(file_get_contents('php://input'), true);
@@ -13,15 +15,25 @@ if (!is_array($input)) {
 }
 
 $host_user_id = isset($input['host_user_id']) ? (int)$input['host_user_id'] : 0;
-$ruleset_id = $input['ruleset_id'] ?? '';
-$rules_snapshot = $input['rules_json_snapshot'] ?? null;
+$ruleset_id = $input['ruleset_id'] ?? 'default.latest';
 $initial_state = $input['state'] ?? [];
 
-if ($host_user_id <= 0 || !$ruleset_id || !is_array($rules_snapshot)) {
+if ($host_user_id <= 0 || !is_array($initial_state)) {
     http_response_code(400);
     echo json_encode(['error' => 'missing fields']);
     exit;
 }
+
+try {
+    $loaded = load_ruleset($ruleset_id);
+} catch (RuntimeException $e) {
+    http_response_code(400);
+    echo json_encode(['error' => 'invalid ruleset']);
+    exit;
+}
+
+$ruleset_id = $loaded['id'];
+$rules_snapshot = $loaded['data'];
 
 $initial_state['version'] = $initial_state['version'] ?? 0;
 
