@@ -1,20 +1,8 @@
 (async function() {
-  const state = { locale: 'en', cards: [] };
+  const state = { cards: [] };
   const container = document.getElementById('card-container');
-  const langSwitch = document.getElementById('lang-switch');
 
-  const typeTranslations = {
-    act: { en: 'Act', de: 'Auftritt' },
-    sponsor: { en: 'Sponsor', de: 'Sponsor' },
-    location: { en: 'Location', de: 'Ort' },
-    marketing: { en: 'Marketing', de: 'Marketing' },
-    sabotage: { en: 'Sabotage', de: 'Sabotage' }
-  };
-
-  langSwitch.addEventListener('change', () => {
-    state.locale = langSwitch.value;
-    renderCards();
-  });
+  document.addEventListener('i18n-loaded', renderCards);
 
   async function loadCards() {
     try {
@@ -35,7 +23,18 @@
 
     const art = document.createElement('img');
     art.className = 'art';
-    art.alt = card.name[state.locale] || card.id;
+    const locale = window.i18n ? window.i18n.locale : 'en';
+    let titleText = '';
+    if (card.name && typeof card.name === 'object') {
+      titleText = card.name[locale] || card.name.en || card.id;
+    } else if (typeof card.name === 'string') {
+      titleText = card.name;
+    } else if (card.name_key) {
+      titleText = window.i18n ? window.i18n.t(card.name_key) : card.id;
+    } else {
+      titleText = card.id;
+    }
+    art.alt = titleText;
     art.dataset.src = card.art || 'https://via.placeholder.com/250x210?text=Art';
     art.loading = 'lazy';
     observer.observe(art);
@@ -43,19 +42,20 @@
 
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = card.name[state.locale] || card.name;
+    title.textContent = titleText;
     cardEl.appendChild(title);
 
     const typeLine = document.createElement('div');
     typeLine.className = 'type-line';
-    const typeTrans = typeTranslations[card.type];
-    typeLine.textContent = typeTrans ? typeTrans[state.locale] : card.type;
+    typeLine.textContent = window.i18n ? window.i18n.t(`type_${card.type}`) : card.type;
     cardEl.appendChild(typeLine);
 
     const rules = document.createElement('div');
     rules.className = 'rules';
     if (card.rules && typeof card.rules === 'object') {
-      rules.textContent = card.rules[state.locale] || '';
+      rules.textContent = card.rules[locale] || card.rules.en || '';
+    } else if (card.rules_key && window.i18n) {
+      rules.textContent = window.i18n.t(card.rules_key);
     }
     cardEl.appendChild(rules);
 

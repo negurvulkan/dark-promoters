@@ -2,22 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title data-i18n="login_title">Login</title>
 </head>
 <body>
-  <h1>Login</h1>
+  <header>
+    <label for="lang-switch" data-i18n="language_label">Language:</label>
+    <select id="lang-switch">
+      <option value="en">EN</option>
+      <option value="de">DE</option>
+    </select>
+  </header>
+  <h1 data-i18n="login_title">Login</h1>
   <form id="login_form">
-    <label>Username:
+    <label><span data-i18n="username_label">Username:</span>
       <input type="text" name="username" required>
     </label>
     <br>
-    <label>Password:
+    <label><span data-i18n="password_label">Password:</span>
       <input type="password" name="password" required>
     </label>
     <br>
-    <button type="submit">Login</button>
+    <button type="submit" data-i18n="login_button">Login</button>
   </form>
-  <p>No account? <a href="register.html">Register</a></p>
+  <p><span data-i18n="no_account">No account?</span> <a href="register.html" data-i18n="register_link">Register</a></p>
+  <script src="i18n.js"></script>
   <script src="auth.js"></script>
 </body>
 </html>
