@@ -102,6 +102,50 @@ function compute_score(array &$state, array $rules): void {
     $state['profit'] = $profit;
 }
 
+function play_card(array &$state, string $cardId, array $rules): void {
+    $hand = $state['hand'] ?? [];
+    $card = null;
+    $index = null;
+    foreach ($hand as $i => $c) {
+        $id = is_array($c) ? ($c['id'] ?? null) : $c;
+        if ($id === $cardId) {
+            $card = is_array($c) ? $c : ['id' => $id];
+            $index = $i;
+            break;
+        }
+    }
+    if ($card === null) {
+        throw new RuntimeException('card not in hand');
+    }
+    $phase = $state['phase'] ?? '';
+    $allowed = allowed_types_for_phase($phase);
+    if (!in_array($card['type'] ?? '', $allowed, true)) {
+        throw new RuntimeException('card not allowed in phase');
+    }
+    array_splice($hand, $index, 1);
+    $state['hand'] = array_values($hand);
+    $state['table'] = $state['table'] ?? [];
+    $state['table'][] = $card;
+    apply_card_effect($state, $card, $rules);
+    $state['log'][] = "play {$cardId}";
+}
+
+function end_phase(array &$state): void {
+    $state['phase'] = next_phase($state['phase'] ?? '');
+    $state['log'][] = "phase {$state['phase']}";
+}
+
+function check_win(array &$state, array $rules): void {
+    if (($state['phase'] ?? '') === 'event') {
+        compute_score($state, $rules);
+        $state['winner'] = $state['winner'] ?? 'player';
+    } elseif (($state['phase'] ?? '') === 'game_over') {
+        compute_score($state, $rules);
+        $reward = $rules['global']['winReward'] ?? 0;
+        $state['log'][] = "game over profit {$state['profit']} audience {$state['audience']} reward {$reward}";
+    }
+}
+
 function apply_action(array $state, array $action, array $rules): array {
     $state['log'] = $state['log'] ?? [];
     $type = $action['type'] ?? '';
@@ -110,62 +154,27 @@ function apply_action(array $state, array $action, array $rules): array {
         if (!$cardId) {
             throw new RuntimeException('missing card');
         }
-        $hand = $state['hand'] ?? [];
-        $card = null;
-        $index = null;
-        foreach ($hand as $i => $c) {
-            $id = is_array($c) ? ($c['id'] ?? null) : $c;
-            if ($id === $cardId) {
-                $card = is_array($c) ? $c : ['id' => $id];
-                $index = $i;
-                break;
-            }
-        }
-        if ($card === null) {
-            throw new RuntimeException('card not in hand');
-        }
-        $phase = $state['phase'] ?? '';
-        $allowed = allowed_types_for_phase($phase);
-        if (!in_array($card['type'] ?? '', $allowed, true)) {
-            throw new RuntimeException('card not allowed in phase');
-        }
-        array_splice($hand, $index, 1);
-        $state['hand'] = array_values($hand);
-        $state['table'] = $state['table'] ?? [];
-        $state['table'][] = $card;
-        apply_card_effect($state, $card, $rules);
-        $state['log'][] = "play {$cardId}";
+        play_card($state, $cardId, $rules);
     } elseif ($type === 'next_phase') {
-        $state['phase'] = next_phase($state['phase'] ?? '');
-        $state['log'][] = "phase {$state['phase']}";
-        if ($state['phase'] === 'event') {
-            compute_score($state, $rules);
-            $state['winner'] = $state['winner'] ?? 'player';
-        } elseif ($state['phase'] === 'game_over') {
-            compute_score($state, $rules);
-            $reward = $rules['global']['winReward'] ?? 0;
-            $state['log'][] = "game over profit {$state['profit']} audience {$state['audience']} reward {$reward}";
-        }
+        end_phase($state);
     } else {
         $state['log'][] = ['unknown_action' => $action];
     }
+    check_win($state, $rules);
     return $state;
 }
 
 $pdo = db();
 try {
-    $pdo->beginTransaction();
-    $stmt = $pdo->prepare('SELECT state_json, version, rules_json_snapshot FROM games WHERE id = ? FOR UPDATE');
+    $stmt = $pdo->prepare('SELECT state_json, version, rules_json_snapshot FROM games WHERE id = ?');
     $stmt->execute([$game_id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$row) {
-        $pdo->rollBack();
         http_response_code(404);
         echo json_encode(['error' => 'game not found']);
         exit;
     }
     if ((int)$row['version'] !== $expected_version) {
-        $pdo->rollBack();
         http_response_code(409);
         echo json_encode(['error' => 'version mismatch']);
         exit;
@@ -174,17 +183,20 @@ try {
     $rules = json_decode($row['rules_json_snapshot'], true);
     $new_state = apply_action($state, $action, $rules);
     $new_state['version'] = $state['version'] + 1;
-    $update = $pdo->prepare('UPDATE games SET state_json = :state, version = version + 1 WHERE id = :id');
-    $update->execute([
-        ':state' => json_encode($new_state, JSON_UNESCAPED_UNICODE),
-        ':id' => $game_id,
-    ]);
-    $pdo->commit();
+    update_game_state($pdo, $game_id, $expected_version, $new_state);
     echo json_encode(['state' => $new_state], JSON_UNESCAPED_UNICODE);
-} catch (Throwable $e) {
-    if ($pdo->inTransaction()) {
-        $pdo->rollBack();
+} catch (RuntimeException $e) {
+    if ($e->getMessage() === 'Version mismatch') {
+        http_response_code(409);
+        echo json_encode(['error' => 'version mismatch']);
+    } elseif ($e->getMessage() === 'Game not found') {
+        http_response_code(404);
+        echo json_encode(['error' => 'game not found']);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'server error']);
     }
+} catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(['error' => 'server error']);
 }
