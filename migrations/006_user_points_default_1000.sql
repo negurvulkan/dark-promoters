@@ -1,0 +1,3 @@
+ALTER TABLE users ALTER COLUMN points SET DEFAULT 1000;
+UPDATE users SET points = 1000 WHERE points = 0;
+
