@@ -10,6 +10,14 @@ async function sendAuth(url, data) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const authLinks = document.getElementById('auth_links');
+  const userLinks = document.getElementById('user_links');
+  if (authLinks && userLinks) {
+    const token = localStorage.getItem('session_token');
+    authLinks.style.display = token ? 'none' : '';
+    userLinks.style.display = token ? '' : 'none';
+  }
+
   const loginForm = document.getElementById('login_form');
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
