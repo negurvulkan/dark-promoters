@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/_auth.php';
+
 header('Content-Type: application/json');
 
 function db(): PDO {
@@ -13,9 +15,10 @@ function db(): PDO {
 }
 
 $pdo = db();
+$user = require_session($pdo);
 
 $stmt = $pdo->query(
-    "SELECT m.id AS match_id, mp.user_id, u.username
+    "SELECT m.id AS match_id, m.name, m.max_players, m.creator_id, mp.user_id, u.username
      FROM matches m
      LEFT JOIN match_players mp ON mp.match_id = m.id
      LEFT JOIN users u ON mp.user_id = u.id
@@ -29,6 +32,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     if (!isset($matches[$id])) {
         $matches[$id] = [
             'id' => $id,
+            'name' => $row['name'],
+            'max_players' => (int)$row['max_players'],
+            'creator_id' => (int)$row['creator_id'],
             'players' => [],
         ];
     }
@@ -40,4 +46,4 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     }
 }
 
-echo json_encode(array_values($matches), JSON_UNESCAPED_UNICODE);
+echo json_encode(['user_id' => $user['id'], 'matches' => array_values($matches)], JSON_UNESCAPED_UNICODE);

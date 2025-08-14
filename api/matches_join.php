@@ -33,9 +33,9 @@ $user = require_session($pdo);
 
 try {
     $pdo->beginTransaction();
-    $stmt = $pdo->prepare('SELECT status FROM matches WHERE id = :id FOR UPDATE');
-    $stmt->execute([':id' => $match_id]);
-    $match = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare('SELECT status, max_players FROM matches WHERE id = :id FOR UPDATE');
+$stmt->execute([':id' => $match_id]);
+$match = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$match) {
         $pdo->rollBack();
         http_response_code(404);
@@ -57,7 +57,7 @@ try {
         echo json_encode(['error' => 'already joined'], JSON_UNESCAPED_UNICODE);
         exit;
     }
-    if (count($players) >= 4) {
+    if (count($players) >= (int)$match['max_players']) {
         $pdo->rollBack();
         http_response_code(400);
         echo json_encode(['error' => 'match full'], JSON_UNESCAPED_UNICODE);

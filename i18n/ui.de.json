@@ -29,5 +29,14 @@
   "cost_header": "Kosten",
   "buy_header": "Kaufen",
   "buy_button": "Kaufen",
-  "purchase_failed": "Kauf fehlgeschlagen"
+  "purchase_failed": "Kauf fehlgeschlagen",
+  "matches_title": "Matches",
+  "match_name_label": "Name:",
+  "max_players_label": "Max. Spieler:",
+  "create_match_button": "Match erstellen",
+  "match_name_header": "Match",
+  "players_header": "Spieler",
+  "actions_header": "Aktionen",
+  "join_button": "Beitreten",
+  "start_button": "Starten"
 }
