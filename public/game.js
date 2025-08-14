@@ -148,10 +148,12 @@
       const es = new EventSource(`/api/stream.php?game_id=${gameId}`);
       es.onmessage = e => {
         try {
-          const state = JSON.parse(e.data);
-          expectedVersion = parseInt(e.lastEventId, 10) || expectedVersion;
-          state.version = expectedVersion;
-          renderState(state);
+          const msg = JSON.parse(e.data);
+          const version = parseInt(msg.version, 10);
+          if (version && version > expectedVersion) {
+            expectedVersion = version;
+            loadState();
+          }
         } catch (err) {
           console.error('Bad SSE data', err);
         }
