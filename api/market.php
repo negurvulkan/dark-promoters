@@ -3,15 +3,9 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/_auth.php';
 require_once __DIR__ . '/_points.php';
+require_once __DIR__ . '/../db.php';
 
 header('Content-Type: application/json');
-
-function db(): PDO {
-  $dsn = getenv('DATABASE_URL') ?: 'pgsql:host=localhost;dbname=dark_promoters';
-  $pdo = new PDO($dsn);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  return $pdo;
-}
 
 function load_packs(): array {
   $path = realpath(__DIR__ . '/../packs.json');

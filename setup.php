@@ -25,20 +25,24 @@ $configContent = "<?php\nreturn [\n    'db_host' => '" . addslashes($host) . "',
 file_put_contents(__DIR__ . '/config.php', $configContent);
 echo "config.php written\n";
 
-// Connect to MySQL
-$dsn = "mysql:host={$host};port={$port}";
+// Load config and connect to MySQL server
+$cfg = require __DIR__ . '/config.php';
+$dsnServer = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};charset=utf8mb4";
 try {
-    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $pdo = new PDO($dsnServer, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {
     fwrite(STDERR, "Connection failed: " . $e->getMessage() . "\n");
     exit(1);
 }
 
 // Create database if not exists
-$pdo->exec("CREATE DATABASE IF NOT EXISTS `{$name}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-$pdo->exec("USE `{$name}`");
+$pdo->exec('CREATE DATABASE IF NOT EXISTS `'.$cfg['db_name'].'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 
-echo "Database '{$name}' ready\n";
+// Connect to target database
+$dsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']};charset=utf8mb4";
+$pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+echo "Database '{$cfg['db_name']}' ready\n";
 
 // Run migrations
 $migrationsDir = __DIR__ . '/migrations';
@@ -52,4 +56,3 @@ foreach ($files as $file) {
 }
 
 echo "Setup complete.\n";
-
