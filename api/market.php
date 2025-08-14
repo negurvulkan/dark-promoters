@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/_auth.php';
+require_once __DIR__ . '/_points.php';
 
 header('Content-Type: application/json');
 
@@ -77,17 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
   $cost = (int)($pack['cost'] ?? 0);
   $pdo->beginTransaction();
-  $stmt = $pdo->prepare('SELECT points FROM users WHERE id = ? FOR UPDATE');
-  $stmt->execute([$user['id']]);
-  $points = (int)$stmt->fetchColumn();
-  if ($points < $cost) {
+  if (!spend_points($pdo, $user['id'], $cost, 'buy pack ' . $packId)) {
     $pdo->rollBack();
     http_response_code(400);
     echo json_encode(['error' => 'insufficient points']);
     exit;
   }
-  $stmt = $pdo->prepare('UPDATE users SET points = points - :cost WHERE id = :uid');
-  $stmt->execute([':cost' => $cost, ':uid' => $user['id']]);
 
   $cardsByType = load_cards_by_type();
   $awarded = [];
@@ -109,7 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
   $pdo->commit();
-  $newPoints = $points - $cost;
+  $stmt = $pdo->prepare('SELECT points FROM users WHERE id = ?');
+  $stmt->execute([$user['id']]);
+  $newPoints = (int)$stmt->fetchColumn();
   echo json_encode(['points' => $newPoints, 'awarded' => $awarded], JSON_UNESCAPED_UNICODE);
   exit;
 }

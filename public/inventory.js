@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const filterInput = document.getElementById('filter');
   const tbody = document.getElementById('inventory_body');
+  const pointsEl = document.getElementById('points');
   let inventory = [];
 
   async function loadInventory() {
@@ -18,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       const json = await res.json();
       inventory = json.inventory || [];
+      if (pointsEl) {
+        pointsEl.textContent = json.points || 0;
+      }
       render();
     } catch (err) {
       console.error(err);
