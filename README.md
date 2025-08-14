@@ -83,7 +83,7 @@ Backend: simple API
 
     POST /api/login.php → {username, password} → returns session_token
 
-    POST /api/logout.php → Authorization or {session_token} → invalidate session
+    POST /api/logout.php → Authorization header → invalidate session
 
     GET /api/cards.php → loads/merges all card JSONs (recursive scan + APCu/ETag caching)
 
@@ -126,7 +126,7 @@ Frontend pages & example flow
 
   Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.
 
-Session tokens are stored in the `sessions` table with an expiry and returned by `/api/login.php`. Clients persist the token (e.g., `localStorage`) and send it on requests via `Authorization: Bearer <token>` or a `session_token` parameter. `/api/logout.php` deletes the token. Ensure migrations `001_initial.sql` and `002_add_password_hash.sql` are applied before using these endpoints.
+Session tokens are stored in the `sessions` table with an expiry and returned by `/api/login.php`. Clients persist the token (e.g., `localStorage`) and send it on requests via `Authorization: Bearer <token>`. `/api/logout.php` deletes the token. Ensure migrations `001_initial.sql` and `002_add_password_hash.sql` are applied before using these endpoints.
 
 Game state is stored as JSON in the DB for quick iteration (games.state_json, versioned).
 Internationalization (EN/DE)

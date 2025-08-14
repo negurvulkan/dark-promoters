@@ -80,10 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         await fetch('/api/logout.php', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': token ? `Bearer ${token}` : ''
-          },
-          body: JSON.stringify({ session_token: token })
+          }
         });
       } catch (err) {
         console.error(err);
