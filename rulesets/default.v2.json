@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "id": "default.v2",
+  "features": {},
+  "global": {
+    "winReward": 100
+  },
+  "modes": {}
+}

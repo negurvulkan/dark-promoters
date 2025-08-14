@@ -72,6 +72,8 @@ Tie-breakers:
 2) Lowest **Total Spend**  
 3) Most **Acts** booked
 
+Winner receives **100** community points (ruleset `global.winReward`).
+
 ---
 
 ## 5) Sponsors
