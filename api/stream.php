@@ -5,6 +5,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../db.php';
+
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 
@@ -14,13 +16,6 @@ if ($game_id <= 0) {
     http_response_code(400);
     echo "data: {\"error\":\"missing game_id\"}\n\n";
     exit;
-}
-
-function db(): PDO {
-    $dsn = getenv('DATABASE_URL') ?: 'pgsql:host=localhost;dbname=dark_promoters';
-    $pdo = new PDO($dsn);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
 }
 
 $pdo = db();

@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/_game.php';
+require_once __DIR__ . '/../db.php';
 
 header('Content-Type: application/json');
 
@@ -23,13 +24,6 @@ if ($host_user_id <= 0 || !is_array($initial_state)) {
     http_response_code(400);
     echo json_encode(['error' => 'missing fields']);
     exit;
-}
-
-function db(): PDO {
-    $dsn = getenv('DATABASE_URL') ?: 'pgsql:host=localhost;dbname=dark_promoters';
-    $pdo = new PDO($dsn);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
 }
 
 try {

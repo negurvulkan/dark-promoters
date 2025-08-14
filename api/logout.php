@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../db.php';
+
 header('Content-Type: application/json');
 
 $sessionToken = $_SERVER['HTTP_X_SESSION_TOKEN'] ?? $_SERVER['HTTP_SESSION_TOKEN'] ?? '';
@@ -18,13 +20,6 @@ if ($sessionToken === '') {
     http_response_code(400);
     echo json_encode(['error' => 'missing session_token']);
     exit;
-}
-
-function db(): PDO {
-    $dsn = getenv('DATABASE_URL') ?: 'pgsql:host=localhost;dbname=dark_promoters';
-    $pdo = new PDO($dsn);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
 }
 
 $pdo = db();
