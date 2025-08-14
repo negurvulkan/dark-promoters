@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_aero_brewery",
+  "name": {
+    "en": "Aero Brewery",
+    "de": "Aero Brauerei"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 1800,
+  "style": {
+    "color": "#a8f5be"
+  }
+}

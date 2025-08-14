@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_spoil_merch",
+  "name": {
+    "en": "Spoil Merch",
+    "de": "Merchandise verderben"
+  },
+  "text": {
+    "en": "Target loses 85 audience",
+    "de": "Ziel verliert 85 Publikum"
+  },
+  "style": {
+    "color": "#9e26a5"
+  }
+}

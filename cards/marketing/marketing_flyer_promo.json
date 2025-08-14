@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_flyer_promo",
+  "name": {
+    "en": "Flyer Promo",
+    "de": "Flyer-Promo"
+  },
+  "cost": 1100,
+  "audience_pct": 0.074,
+  "style": {
+    "color": "#70a3d3"
+  }
+}

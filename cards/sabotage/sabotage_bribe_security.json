@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_bribe_security",
+  "name": {
+    "en": "Bribe Security",
+    "de": "Sicherheitsdienst bestechen"
+  },
+  "text": {
+    "en": "Target loses 20 audience",
+    "de": "Ziel verliert 20 Publikum"
+  },
+  "style": {
+    "color": "#62fc94"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_neon_plaza",
+  "name": {
+    "en": "Neon Plaza",
+    "de": "Neon-Platz"
+  },
+  "rent": 4000,
+  "capacity": 950,
+  "style": {
+    "color": "#4cccc5"
+  }
+}

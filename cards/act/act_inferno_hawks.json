@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_inferno_hawks",
+  "name": {
+    "en": "Inferno Hawks",
+    "de": "Inferno Habichte"
+  },
+  "cost": 11000,
+  "audience_pct": 0.11,
+  "style": {
+    "color": "#40da69"
+  }
+}

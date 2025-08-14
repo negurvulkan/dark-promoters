@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_sms_blitz",
+  "name": {
+    "en": "SMS Blitz",
+    "de": "SMS-Blitz"
+  },
+  "cost": 700,
+  "audience_pct": 0.05,
+  "style": {
+    "color": "#555553"
+  }
+}

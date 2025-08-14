@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_electric_ravens",
+  "name": {
+    "en": "Electric Ravens",
+    "de": "Elektrische Raben"
+  },
+  "cost": 14500,
+  "audience_pct": 0.145,
+  "style": {
+    "color": "#5cba87"
+  }
+}

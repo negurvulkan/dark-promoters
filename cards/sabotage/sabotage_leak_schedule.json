@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_leak_schedule",
+  "name": {
+    "en": "Leak Schedule",
+    "de": "Plan leaken"
+  },
+  "text": {
+    "en": "Target loses 15 audience",
+    "de": "Ziel verliert 15 Publikum"
+  },
+  "style": {
+    "color": "#5e6f7f"
+  }
+}

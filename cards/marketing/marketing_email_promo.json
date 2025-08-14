@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_email_promo",
+  "name": {
+    "en": "Email Promo",
+    "de": "E-Mail-Promo"
+  },
+  "cost": 600,
+  "audience_pct": 0.044,
+  "style": {
+    "color": "#4e81b3"
+  }
+}

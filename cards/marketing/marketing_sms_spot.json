@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_sms_spot",
+  "name": {
+    "en": "SMS Spot",
+    "de": "SMS-Spot"
+  },
+  "cost": 1450,
+  "audience_pct": 0.095,
+  "style": {
+    "color": "#888883"
+  }
+}

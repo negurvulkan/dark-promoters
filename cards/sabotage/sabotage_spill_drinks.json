@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_spill_drinks",
+  "name": {
+    "en": "Spill Drinks",
+    "de": "Getränke verschütten"
+  },
+  "text": {
+    "en": "Target loses 135 audience",
+    "de": "Ziel verliert 135 Publikum"
+  },
+  "style": {
+    "color": "#cba977"
+  }
+}

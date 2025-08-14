@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_emerald_plaza",
+  "name": {
+    "en": "Emerald Plaza",
+    "de": "Smaragd-Platz"
+  },
+  "rent": 2000,
+  "capacity": 450,
+  "style": {
+    "color": "#305b03"
+  }
+}

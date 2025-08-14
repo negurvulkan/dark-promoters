@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_misplace_passes",
+  "name": {
+    "en": "Misplace Passes",
+    "de": "Pässe verlegen"
+  },
+  "text": {
+    "en": "Target loses 140 audience",
+    "de": "Ziel verliert 140 Publikum"
+  },
+  "style": {
+    "color": "#d0368c"
+  }
+}

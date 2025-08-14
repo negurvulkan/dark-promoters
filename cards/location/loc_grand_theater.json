@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_grand_theater",
+  "name": {
+    "en": "Grand Theater",
+    "de": "Große-Theater"
+  },
+  "rent": 5600,
+  "capacity": 1350,
+  "style": {
+    "color": "#638e2d"
+  }
+}

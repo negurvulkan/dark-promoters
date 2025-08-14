@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_smear_online",
+  "name": {
+    "en": "Smear Online",
+    "de": "Online verleumden"
+  },
+  "text": {
+    "en": "Target loses 70 audience",
+    "de": "Ziel verliert 70 Publikum"
+  },
+  "style": {
+    "color": "#907f66"
+  }
+}

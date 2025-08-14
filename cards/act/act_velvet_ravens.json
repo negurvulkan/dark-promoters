@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_velvet_ravens",
+  "name": {
+    "en": "Velvet Ravens",
+    "de": "Samtige Raben"
+  },
+  "cost": 19500,
+  "audience_pct": 0.195,
+  "style": {
+    "color": "#848cfb"
+  }
+}

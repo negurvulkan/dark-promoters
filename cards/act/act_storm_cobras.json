@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_storm_cobras",
+  "name": {
+    "en": "Storm Cobras",
+    "de": "Sturm Kobras"
+  },
+  "cost": 19000,
+  "audience_pct": 0.19,
+  "style": {
+    "color": "#809189"
+  }
+}

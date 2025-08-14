@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_metro_warehouse",
+  "name": {
+    "en": "Metro Warehouse",
+    "de": "Metro-Lagerhalle"
+  },
+  "rent": 4600,
+  "capacity": 1100,
+  "style": {
+    "color": "#55554c"
+  }
+}

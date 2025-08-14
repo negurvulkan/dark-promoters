@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_trigger_alarm",
+  "name": {
+    "en": "Trigger Alarm",
+    "de": "Alarm auslösen"
+  },
+  "text": {
+    "en": "Target loses 145 audience",
+    "de": "Ziel verliert 145 Publikum"
+  },
+  "style": {
+    "color": "#d4c3a1"
+  }
+}

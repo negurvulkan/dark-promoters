@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_wild_hawks",
+  "name": {
+    "en": "Wild Hawks",
+    "de": "Wilde Habichte"
+  },
+  "cost": 16000,
+  "audience_pct": 0.16,
+  "style": {
+    "color": "#68acdd"
+  }
+}

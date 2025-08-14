@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_guerilla_series",
+  "name": {
+    "en": "Guerilla Series",
+    "de": "Guerilla-Serie"
+  },
+  "cost": 1400,
+  "audience_pct": 0.092,
+  "style": {
+    "color": "#851eb3"
+  }
+}

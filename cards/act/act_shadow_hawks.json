@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_shadow_hawks",
+  "name": {
+    "en": "Shadow Hawks",
+    "de": "Schatten Habichte"
+  },
+  "cost": 6000,
+  "audience_pct": 0.06,
+  "style": {
+    "color": "#1907f5"
+  }
+}

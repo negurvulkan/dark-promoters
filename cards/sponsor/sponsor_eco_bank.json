@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_eco_bank",
+  "name": {
+    "en": "Eco Bank",
+    "de": "Eco Bank"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 1700,
+  "style": {
+    "color": "#a3d706"
+  }
+}

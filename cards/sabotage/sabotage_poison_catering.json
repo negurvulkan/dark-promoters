@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_poison_catering",
+  "name": {
+    "en": "Poison Catering",
+    "de": "Catering vergiften"
+  },
+  "text": {
+    "en": "Target loses 35 audience",
+    "de": "Ziel verliert 35 Publikum"
+  },
+  "style": {
+    "color": "#70a3d3"
+  }
+}

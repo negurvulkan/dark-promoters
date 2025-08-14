@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_dynamic_clothing",
+  "name": {
+    "en": "Dynamic Clothing",
+    "de": "Dynamisch Bekleidung"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 2900,
+  "style": {
+    "color": "#e147a6"
+  }
+}

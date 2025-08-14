@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_mega_energy",
+  "name": {
+    "en": "Mega Energy",
+    "de": "Mega Energie"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 500,
+  "style": {
+    "color": "#666666"
+  }
+}

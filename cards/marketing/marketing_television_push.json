@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_television_push",
+  "name": {
+    "en": "Television Push",
+    "de": "Fernsehen-Push"
+  },
+  "cost": 300,
+  "audience_pct": 0.026,
+  "style": {
+    "color": "#3a06d3"
+  }
+}

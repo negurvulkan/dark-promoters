@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_skyline_stadium",
+  "name": {
+    "en": "Skyline Stadium",
+    "de": "Skyline-Stadion"
+  },
+  "rent": 4200,
+  "capacity": 1000,
+  "style": {
+    "color": "#4fa4f2"
+  }
+}

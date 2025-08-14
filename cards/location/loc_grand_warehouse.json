@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_grand_warehouse",
+  "name": {
+    "en": "Grand Warehouse",
+    "de": "Große-Lagerhalle"
+  },
+  "rent": 2600,
+  "capacity": 600,
+  "style": {
+    "color": "#38e38a"
+  }
+}

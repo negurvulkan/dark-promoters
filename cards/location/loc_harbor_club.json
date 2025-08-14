@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_harbor_club",
+  "name": {
+    "en": "Harbor Club",
+    "de": "Hafen Club"
+  },
+  "rent": 1400,
+  "capacity": 300,
+  "style": {
+    "color": "#27d27c"
+  }
+}

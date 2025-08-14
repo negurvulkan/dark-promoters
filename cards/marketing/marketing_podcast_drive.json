@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_podcast_drive",
+  "name": {
+    "en": "Podcast Drive",
+    "de": "Podcast Aktion"
+  },
+  "cost": 550,
+  "audience_pct": 0.041,
+  "style": {
+    "color": "#4b17e3"
+  }
+}

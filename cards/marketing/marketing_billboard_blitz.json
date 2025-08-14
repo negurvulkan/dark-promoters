@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_billboard_blitz",
+  "name": {
+    "en": "Billboard Blitz",
+    "de": "Plakatwand-Blitz"
+  },
+  "cost": 1200,
+  "audience_pct": 0.08,
+  "style": {
+    "color": "#777773"
+  }
+}

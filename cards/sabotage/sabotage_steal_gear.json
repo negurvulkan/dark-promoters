@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_steal_gear",
+  "name": {
+    "en": "Steal Gear",
+    "de": "Ausrüstung stehlen"
+  },
+  "text": {
+    "en": "Target loses 55 audience",
+    "de": "Ziel verliert 55 Publikum"
+  },
+  "style": {
+    "color": "#82d827"
+  }
+}

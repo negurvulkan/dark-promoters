@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_velvet_lions",
+  "name": {
+    "en": "Velvet Lions",
+    "de": "Samtige Löwen"
+  },
+  "cost": 12000,
+  "audience_pct": 0.12,
+  "style": {
+    "color": "#48d14d"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_influencer_wave",
+  "name": {
+    "en": "Influencer Wave",
+    "de": "Influencer-Welle"
+  },
+  "cost": 1150,
+  "audience_pct": 0.077,
+  "style": {
+    "color": "#740da3"
+  }
+}

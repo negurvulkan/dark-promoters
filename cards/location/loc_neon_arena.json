@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_neon_arena",
+  "name": {
+    "en": "Neon Arena",
+    "de": "Neon-Arena"
+  },
+  "rent": 1000,
+  "capacity": 200,
+  "style": {
+    "color": "#222222"
+  }
+}

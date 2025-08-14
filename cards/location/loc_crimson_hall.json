@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_crimson_hall",
+  "name": {
+    "en": "Crimson Hall",
+    "de": "Purpur-Halle"
+  },
+  "rent": 5200,
+  "capacity": 1250,
+  "style": {
+    "color": "#5dddd3"
+  }
+}

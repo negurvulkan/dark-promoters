@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_press_drive",
+  "name": {
+    "en": "Press Drive",
+    "de": "Presse Aktion"
+  },
+  "cost": 1550,
+  "audience_pct": 0.101,
+  "style": {
+    "color": "#8f5c23"
+  }
+}

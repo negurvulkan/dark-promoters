@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_neon_tigers",
+  "name": {
+    "en": "Neon Tigers",
+    "de": "Neon Tiger"
+  },
+  "cost": 5500,
+  "audience_pct": 0.055,
+  "style": {
+    "color": "#150c83"
+  }
+}

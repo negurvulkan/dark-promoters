@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_inferno_owls",
+  "name": {
+    "en": "Inferno Owls",
+    "de": "Inferno Eulen"
+  },
+  "cost": 18500,
+  "audience_pct": 0.185,
+  "style": {
+    "color": "#7c9617"
+  }
+}

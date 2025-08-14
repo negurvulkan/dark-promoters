@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_bus_wrap_wave",
+  "name": {
+    "en": "Bus Wrap Wave",
+    "de": "Buswerbung-Welle"
+  },
+  "cost": 1650,
+  "audience_pct": 0.107,
+  "style": {
+    "color": "#962fc3"
+  }
+}

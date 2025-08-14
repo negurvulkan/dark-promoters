@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_lock_doors",
+  "name": {
+    "en": "Lock Doors",
+    "de": "Türen verriegeln"
+  },
+  "text": {
+    "en": "Target loses 90 audience",
+    "de": "Ziel verliert 90 Publikum"
+  },
+  "style": {
+    "color": "#a2b3ba"
+  }
+}

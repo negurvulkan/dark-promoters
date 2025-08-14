@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_crystal_club",
+  "name": {
+    "en": "Crystal Club",
+    "de": "Kristall Club"
+  },
+  "rent": 5400,
+  "capacity": 1300,
+  "style": {
+    "color": "#60b600"
+  }
+}

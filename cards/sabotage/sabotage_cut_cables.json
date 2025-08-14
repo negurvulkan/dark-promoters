@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_cut_cables",
+  "name": {
+    "en": "Cut Cables",
+    "de": "Kabel durchtrennen"
+  },
+  "text": {
+    "en": "Target loses 80 audience",
+    "de": "Ziel verliert 80 Publikum"
+  },
+  "style": {
+    "color": "#999990"
+  }
+}

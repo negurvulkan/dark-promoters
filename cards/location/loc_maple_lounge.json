@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_maple_lounge",
+  "name": {
+    "en": "Maple Lounge",
+    "de": "Ahorn Lounge"
+  },
+  "rent": 6400,
+  "capacity": 1550,
+  "style": {
+    "color": "#6eeee1"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_flood_venue",
+  "name": {
+    "en": "Flood Venue",
+    "de": "Location fluten"
+  },
+  "text": {
+    "en": "Target loses 105 audience",
+    "de": "Ziel verliert 105 Publikum"
+  },
+  "style": {
+    "color": "#b05af9"
+  }
+}

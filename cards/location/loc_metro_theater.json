@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_metro_theater",
+  "name": {
+    "en": "Metro Theater",
+    "de": "Metro-Theater"
+  },
+  "rent": 1600,
+  "capacity": 350,
+  "style": {
+    "color": "#2aaaa9"
+  }
+}

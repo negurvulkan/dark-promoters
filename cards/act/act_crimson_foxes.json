@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_crimson_foxes",
+  "name": {
+    "en": "Crimson Foxes",
+    "de": "Purpurne Füchse"
+  },
+  "cost": 7500,
+  "audience_pct": 0.075,
+  "style": {
+    "color": "#24fa4b"
+  }
+}

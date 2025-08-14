@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_unity_logistics",
+  "name": {
+    "en": "Unity Logistics",
+    "de": "Unity Logistik"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 3400,
+  "style": {
+    "color": "#fae13e"
+  }
+}

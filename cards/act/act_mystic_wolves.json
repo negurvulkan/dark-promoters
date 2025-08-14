@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_mystic_wolves",
+  "name": {
+    "en": "Mystic Wolves",
+    "de": "Mystische Wölfe"
+  },
+  "cost": 10000,
+  "audience_pct": 0.1,
+  "style": {
+    "color": "#38e385"
+  }
+}

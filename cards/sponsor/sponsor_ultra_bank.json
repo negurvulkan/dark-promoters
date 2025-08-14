@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_ultra_bank",
+  "name": {
+    "en": "Ultra Bank",
+    "de": "Ultra Bank"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 700,
+  "style": {
+    "color": "#70a3d6"
+  }
+}

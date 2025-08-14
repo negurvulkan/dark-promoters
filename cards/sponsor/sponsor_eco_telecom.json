@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_eco_telecom",
+  "name": {
+    "en": "Eco Telecom",
+    "de": "Eco Telekom"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 3200,
+  "style": {
+    "color": "#f0a3ce"
+  }
+}

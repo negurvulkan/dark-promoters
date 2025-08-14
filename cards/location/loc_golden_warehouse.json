@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_golden_warehouse",
+  "name": {
+    "en": "Golden Warehouse",
+    "de": "Goldene-Lagerhalle"
+  },
+  "rent": 6600,
+  "capacity": 1600,
+  "style": {
+    "color": "#71c70e"
+  }
+}

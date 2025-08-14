@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_thunder_foxes",
+  "name": {
+    "en": "Thunder Foxes",
+    "de": "Donner Füchse"
+  },
+  "cost": 12500,
+  "audience_pct": 0.125,
+  "style": {
+    "color": "#4cccbf"
+  }
+}

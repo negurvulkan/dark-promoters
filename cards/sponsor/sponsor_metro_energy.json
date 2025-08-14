@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_metro_energy",
+  "name": {
+    "en": "Metro Energy",
+    "de": "Metro Energie"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 1500,
+  "style": {
+    "color": "#999996"
+  }
+}

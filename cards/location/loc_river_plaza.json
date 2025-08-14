@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_river_plaza",
+  "name": {
+    "en": "River Plaza",
+    "de": "Fluss-Platz"
+  },
+  "rent": 6000,
+  "capacity": 1450,
+  "style": {
+    "color": "#693e87"
+  }
+}

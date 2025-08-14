@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_unity_clothing",
+  "name": {
+    "en": "Unity Clothing",
+    "de": "Unity Bekleidung"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 1900,
+  "style": {
+    "color": "#ae1476"
+  }
+}

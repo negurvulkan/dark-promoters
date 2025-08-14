@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_hyper_tech",
+  "name": {
+    "en": "Hyper Tech",
+    "de": "Hyper Technik"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 1600,
+  "style": {
+    "color": "#9eb84e"
+  }
+}

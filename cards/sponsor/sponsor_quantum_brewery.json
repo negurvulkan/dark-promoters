@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_quantum_brewery",
+  "name": {
+    "en": "Quantum Brewery",
+    "de": "Quantum Brauerei"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 2800,
+  "style": {
+    "color": "#dc28ee"
+  }
+}

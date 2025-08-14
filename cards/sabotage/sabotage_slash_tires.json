@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_slash_tires",
+  "name": {
+    "en": "Slash Tires",
+    "de": "Reifen zerstechen"
+  },
+  "text": {
+    "en": "Target loses 115 audience",
+    "de": "Ziel verliert 115 Publikum"
+  },
+  "style": {
+    "color": "#b97523"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_billboard_spot",
+  "name": {
+    "en": "Billboard Spot",
+    "de": "Plakatwand-Spot"
+  },
+  "cost": 450,
+  "audience_pct": 0.035,
+  "style": {
+    "color": "#444443"
+  }
+}

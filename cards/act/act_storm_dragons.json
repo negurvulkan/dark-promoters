@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_storm_dragons",
+  "name": {
+    "en": "Storm Dragons",
+    "de": "Sturm Drachen"
+  },
+  "cost": 11500,
+  "audience_pct": 0.115,
+  "style": {
+    "color": "#44d5db"
+  }
+}

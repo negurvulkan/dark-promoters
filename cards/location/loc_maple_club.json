@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_maple_club",
+  "name": {
+    "en": "Maple Club",
+    "de": "Ahorn Club"
+  },
+  "rent": 3400,
+  "capacity": 800,
+  "style": {
+    "color": "#44443e"
+  }
+}

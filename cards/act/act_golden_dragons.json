@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_golden_dragons",
+  "name": {
+    "en": "Golden Dragons",
+    "de": "Goldene Drachen"
+  },
+  "cost": 6500,
+  "audience_pct": 0.065,
+  "style": {
+    "color": "#1d0367"
+  }
+}

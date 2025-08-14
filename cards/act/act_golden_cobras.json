@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_golden_cobras",
+  "name": {
+    "en": "Golden Cobras",
+    "de": "Goldene Kobras"
+  },
+  "cost": 14000,
+  "audience_pct": 0.14,
+  "style": {
+    "color": "#58bf15"
+  }
+}

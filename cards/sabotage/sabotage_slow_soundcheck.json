@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_slow_soundcheck",
+  "name": {
+    "en": "Slow Soundcheck",
+    "de": "Soundcheck verlangsamen"
+  },
+  "text": {
+    "en": "Target loses 125 audience",
+    "de": "Ziel verliert 125 Publikum"
+  },
+  "style": {
+    "color": "#c28f4d"
+  }
+}

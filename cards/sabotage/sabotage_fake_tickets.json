@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_fake_tickets",
+  "name": {
+    "en": "Fake Tickets",
+    "de": "Falsche Tickets"
+  },
+  "text": {
+    "en": "Target loses 45 audience",
+    "de": "Ziel verliert 45 Publikum"
+  },
+  "style": {
+    "color": "#79bdfd"
+  }
+}
