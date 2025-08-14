@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
     }
   }
+  
   async function loadUsers() {
     try {
       const res = await fetch('/api/admin/user_list.php', { headers: { 'Authorization': `Bearer ${token}` } });
