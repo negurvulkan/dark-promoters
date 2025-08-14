@@ -16,9 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
           'Authorization': `Bearer ${token}`
         }
       });
-      const json = await res.json();
-      pointsEl.textContent = json.points || 0;
-      packs = json.packs || [];
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.error) {
+        if (res.status === 401) {
+          window.location.href = 'login.html';
+        } else {
+          alert(json.error || (window.i18n ? window.i18n.t('load_failed') : 'Failed to load market'));
+        }
+        return;
+      }
+      if (typeof json.points === 'number') {
+        pointsEl.textContent = json.points;
+      }
+      packs = Array.isArray(json.packs) ? json.packs : [];
       render();
     } catch (err) {
       console.error(err);
@@ -40,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(json.error || (window.i18n ? window.i18n.t('purchase_failed') : 'Purchase failed'));
         return;
       }
-      pointsEl.textContent = json.points;
+      if (typeof json.points === 'number') {
+        pointsEl.textContent = json.points;
+      }
       if (json.awarded) {
         alert('Received: ' + json.awarded.join(', '));
       }

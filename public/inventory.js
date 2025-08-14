@@ -17,10 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
           'Authorization': `Bearer ${token}`
         }
       });
-      const json = await res.json();
-      inventory = json.inventory || [];
-      if (pointsEl) {
-        pointsEl.textContent = json.points || 0;
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.error) {
+        if (res.status === 401) {
+          window.location.href = 'login.html';
+        } else {
+          alert(json.error || (window.i18n ? window.i18n.t('load_failed') : 'Failed to load inventory'));
+        }
+        return;
+      }
+      inventory = Array.isArray(json.inventory) ? json.inventory : [];
+      if (pointsEl && typeof json.points === 'number') {
+        pointsEl.textContent = json.points;
       }
       render();
     } catch (err) {
