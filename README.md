@@ -96,6 +96,7 @@ Backend: simple API
 Economy: Points & Packs
 
     - Users start with 1000 points—enough for a starter pack and some booster packs on day one. A daily top-up script (`tools/points_topup.php`) adds 100 points to every account.
+
     - Winning a game awards the `global.winReward` from the active ruleset (100 by default).
     - GET /api/market.php → current point balance and available packs (from `packs.json`).
       - `starter_pack` costs 100 points for 3 acts + 2 locations.
