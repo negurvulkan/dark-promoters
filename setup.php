@@ -15,9 +15,9 @@ function prompt(string $prompt, string $default = ''): string {
 
 // Collect DB credentials
 $host = prompt('DB host', 'localhost');
-$port = prompt('DB port', '3306');
+$port = prompt('DB port', '5432');
 $name = prompt('DB name', 'dark_promoters');
-$user = prompt('DB user', 'root');
+$user = prompt('DB user', 'postgres');
 $pass = prompt('DB password');
 
 // Write config.php
@@ -25,20 +25,30 @@ $configContent = "<?php\nreturn [\n    'db_host' => '" . addslashes($host) . "',
 file_put_contents(__DIR__ . '/config.php', $configContent);
 echo "config.php written\n";
 
-// Connect to MySQL
-$dsn = "mysql:host={$host};port={$port}";
+// Load config and connect to PostgreSQL server
+$cfg = require __DIR__ . '/config.php';
+$dsnServer = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname=postgres";
 try {
-    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $pdo = new PDO($dsnServer, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {
     fwrite(STDERR, "Connection failed: " . $e->getMessage() . "\n");
     exit(1);
 }
 
 // Create database if not exists
-$pdo->exec("CREATE DATABASE IF NOT EXISTS `{$name}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-$pdo->exec("USE `{$name}`");
+try {
+    $pdo->exec('CREATE DATABASE "' . $cfg['db_name'] . '"');
+} catch (PDOException $e) {
+    if ($e->getCode() !== '42P04') {
+        throw $e;
+    }
+}
 
-echo "Database '{$name}' ready\n";
+// Connect to target database
+$dsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']}";
+$pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+echo "Database '{$cfg['db_name']}' ready\n";
 
 // Run migrations
 $migrationsDir = __DIR__ . '/migrations';
@@ -52,4 +62,3 @@ foreach ($files as $file) {
 }
 
 echo "Setup complete.\n";
-

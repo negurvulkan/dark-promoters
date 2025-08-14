@@ -2,9 +2,9 @@
 // Web-based setup script to configure database and run migrations
 $default = [
     'db_host' => 'localhost',
-    'db_port' => '3306',
+    'db_port' => '5432',
     'db_name' => 'dark_promoters',
-    'db_user' => 'root',
+    'db_user' => 'postgres',
 ];
 
 $success = false;
@@ -18,22 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pass = $_POST['db_pass'] ?? '';
 
     // Write config.php
-    $configContent = "<?php
-return [
-    'db_host' => '" . addslashes($host) . "',
-    'db_port' => '" . addslashes($port) . "',
-    'db_name' => '" . addslashes($name) . "',
-    'db_user' => '" . addslashes($user) . "',
-    'db_pass' => '" . addslashes($pass) . "',
-];
-";
-    file_put_contents(dirname(__DIR__) . '/config.php', $configContent);
+    $configContent = "<?php\nreturn [\n    'db_host' => '" . addslashes($host) . "',\n    'db_port' => '" . addslashes($port) . "',\n    'db_name' => '" . addslashes($name) . "',\n    'db_user' => '" . addslashes($user) . "',\n    'db_pass' => '" . addslashes($pass) . "',\n];\n";
+    $configPath = dirname(__DIR__) . '/config.php';
+    file_put_contents($configPath, $configContent);
 
     try {
-        $dsn = "mysql:host={$host};port={$port}";
-        $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$name}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-        $pdo->exec("USE `{$name}`");
+        $cfg = require $configPath;
+        $serverDsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname=postgres";
+        $pdo = new PDO($serverDsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        try {
+            $pdo->exec('CREATE DATABASE "' . $cfg['db_name'] . '"');
+        } catch (PDOException $e) {
+            if ($e->getCode() !== '42P04') {
+                throw $e;
+            }
+        }
+        $dsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']}";
+        $pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+      
         $migrationsDir = dirname(__DIR__) . '/migrations';
         $files = glob($migrationsDir . '/*.sql');
         natsort($files);

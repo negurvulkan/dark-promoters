@@ -2,13 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../api/_points.php';
-
-function db(): PDO {
-    $dsn = getenv('DATABASE_URL') ?: 'pgsql:host=localhost;dbname=dark_promoters';
-    $pdo = new PDO($dsn);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
-}
+require_once __DIR__ . '/../db.php';
 
 $pdo = db();
 
