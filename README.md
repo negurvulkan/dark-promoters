@@ -10,10 +10,9 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 
 ## Quick Start (dev)
 1. PHP 8 + MySQL/MariaDB installed.
-2. Create DB tables: run migrations in `/migrations` (`001_initial.sql` then `002_add_password_hash.sql`).
-3. Configure `config.php` (DB creds).
-4. Serve repo root via `php -S localhost:8080` (or your web server).
-5. Open `http://localhost:8080`.
+2. Run `php setup.php` and follow the prompts to create the database, apply migrations and write `config.php`.
+3. Serve repo root via `php -S localhost:8080` (or your web server).
+4. Open `http://localhost:8080`.
 
 For detailed onboarding steps see `docs/ONBOARDING.md`.
 
