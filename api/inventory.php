@@ -16,6 +16,10 @@ $pdo = db();
 $user = require_session($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $stmt = $pdo->prepare('SELECT points FROM users WHERE id = ?');
+    $stmt->execute([$user['id']]);
+    $points = (int)$stmt->fetchColumn();
+
     $stmt = $pdo->prepare('SELECT card_id, qty FROM card_inventory WHERE user_id = ? ORDER BY card_id');
     $stmt->execute([$user['id']]);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -25,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             'qty' => (int)$r['qty'],
         ];
     }, $rows);
-    echo json_encode(['inventory' => $inventory], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['points' => $points, 'inventory' => $inventory], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

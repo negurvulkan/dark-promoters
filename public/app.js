@@ -1,6 +1,8 @@
 (async function() {
   const state = { cards: [] };
   const container = document.getElementById('card-container');
+  const pointsEl = document.getElementById('points');
+  const token = localStorage.getItem('session_token');
 
   document.addEventListener('i18n-loaded', renderCards);
 
@@ -84,4 +86,15 @@
 
   await loadCards();
   renderCards();
+  if (pointsEl && token) {
+    try {
+      const res = await fetch('/api/inventory.php', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const json = await res.json();
+      pointsEl.textContent = json.points || 0;
+    } catch (e) {
+      console.error('Failed to load points', e);
+    }
+  }
 })();
