@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title data-i18n="card_viewer_title">Card Viewer</title>
+  <title data-i18n="welcome_title">Dark Promoters</title>
   <link rel="stylesheet" href="cards.css">
 </head>
 <body>
@@ -12,11 +12,16 @@
       <option value="en">EN</option>
       <option value="de">DE</option>
     </select>
-    <span data-i18n="points_label">Points:</span> <span id="points">0</span>
-    <a href="matches.html" data-i18n="matches_title">Matches</a>
   </header>
-  <main id="card-container" class="card-grid"></main>
+  <main>
+    <h1 data-i18n="welcome_title">Dark Promoters</h1>
+    <p data-i18n="intro_text">Organize gothic/alt-scene events and compete for the best show.</p>
+    <p>
+      <a href="login.html" data-i18n="login_button">Login</a>
+      <a href="register.html" data-i18n="register_button">Register</a>
+    </p>
+  </main>
   <script src="i18n.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
+
