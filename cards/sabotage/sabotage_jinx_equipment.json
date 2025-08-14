@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_jinx_equipment",
+  "name": {
+    "en": "Jinx Equipment",
+    "de": "Ausrüstung verhext"
+  },
+  "text": {
+    "en": "Target loses 30 audience",
+    "de": "Ziel verliert 30 Publikum"
+  },
+  "style": {
+    "color": "#6c16be"
+  }
+}

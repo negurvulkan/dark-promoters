@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_guerilla_wave",
+  "name": {
+    "en": "Guerilla Wave",
+    "de": "Guerilla-Welle"
+  },
+  "cost": 650,
+  "audience_pct": 0.047,
+  "style": {
+    "color": "#51eb83"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_dynamic_logistics",
+  "name": {
+    "en": "Dynamic Logistics",
+    "de": "Dynamisch Logistik"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 1400,
+  "style": {
+    "color": "#947ade"
+  }
+}

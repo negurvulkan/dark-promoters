@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_shadow_owls",
+  "name": {
+    "en": "Shadow Owls",
+    "de": "Schatten Eulen"
+  },
+  "cost": 13500,
+  "audience_pct": 0.135,
+  "style": {
+    "color": "#54c3a3"
+  }
+}

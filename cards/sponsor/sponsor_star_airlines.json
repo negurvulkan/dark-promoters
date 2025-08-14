@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_star_airlines",
+  "name": {
+    "en": "Star Airlines",
+    "de": "Star Fluglinien"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 2100,
+  "style": {
+    "color": "#b851e6"
+  }
+}

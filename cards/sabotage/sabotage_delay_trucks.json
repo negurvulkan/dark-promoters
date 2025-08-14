@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_delay_trucks",
+  "name": {
+    "en": "Delay Trucks",
+    "de": "Laster verzögern"
+  },
+  "text": {
+    "en": "Target loses 25 audience",
+    "de": "Ziel verliert 25 Publikum"
+  },
+  "style": {
+    "color": "#6789a9"
+  }
+}

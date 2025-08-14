@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_bus_wrap_series",
+  "name": {
+    "en": "Bus Wrap Series",
+    "de": "Buswerbung-Serie"
+  },
+  "cost": 900,
+  "audience_pct": 0.062,
+  "style": {
+    "color": "#62fc93"
+  }
+}

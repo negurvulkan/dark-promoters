@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_frost_bears",
+  "name": {
+    "en": "Frost Bears",
+    "de": "Frostige Bären"
+  },
+  "cost": 18000,
+  "audience_pct": 0.18,
+  "style": {
+    "color": "#789aa5"
+  }
+}

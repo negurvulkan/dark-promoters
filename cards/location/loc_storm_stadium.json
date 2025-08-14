@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_storm_stadium",
+  "name": {
+    "en": "Storm Stadium",
+    "de": "Sturm-Stadion"
+  },
+  "rent": 6200,
+  "capacity": 1500,
+  "style": {
+    "color": "#6c16b4"
+  }
+}

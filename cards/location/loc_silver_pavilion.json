@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_silver_pavilion",
+  "name": {
+    "en": "Silver Pavilion",
+    "de": "Silberne-Pavillon"
+  },
+  "rent": 3800,
+  "capacity": 900,
+  "style": {
+    "color": "#49f498"
+  }
+}

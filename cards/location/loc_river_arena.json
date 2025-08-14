@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_river_arena",
+  "name": {
+    "en": "River Arena",
+    "de": "Fluss-Arena"
+  },
+  "rent": 3000,
+  "capacity": 700,
+  "style": {
+    "color": "#3e93e4"
+  }
+}

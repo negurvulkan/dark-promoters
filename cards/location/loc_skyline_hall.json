@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_skyline_hall",
+  "name": {
+    "en": "Skyline Hall",
+    "de": "Skyline-Halle"
+  },
+  "rent": 1200,
+  "capacity": 250,
+  "style": {
+    "color": "#24fa4f"
+  }
+}

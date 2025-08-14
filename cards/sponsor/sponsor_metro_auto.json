@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_metro_auto",
+  "name": {
+    "en": "Metro Auto",
+    "de": "Metro Auto"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 3000,
+  "style": {
+    "color": "#e6665e"
+  }
+}

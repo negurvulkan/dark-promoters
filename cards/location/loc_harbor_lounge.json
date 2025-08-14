@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_harbor_lounge",
+  "name": {
+    "en": "Harbor Lounge",
+    "de": "Hafen Lounge"
+  },
+  "rent": 4400,
+  "capacity": 1050,
+  "style": {
+    "color": "#527d1f"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_solar_lions",
+  "name": {
+    "en": "Solar Lions",
+    "de": "Solare Löwen"
+  },
+  "cost": 17000,
+  "audience_pct": 0.17,
+  "style": {
+    "color": "#70a3c1"
+  }
+}

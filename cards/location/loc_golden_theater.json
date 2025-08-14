@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_golden_theater",
+  "name": {
+    "en": "Golden Theater",
+    "de": "Goldene-Theater"
+  },
+  "rent": 3600,
+  "capacity": 850,
+  "style": {
+    "color": "#471c6b"
+  }
+}

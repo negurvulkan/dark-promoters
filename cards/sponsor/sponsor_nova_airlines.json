@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_nova_airlines",
+  "name": {
+    "en": "Nova Airlines",
+    "de": "Nova Fluglinien"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 1100,
+  "style": {
+    "color": "#851eb6"
+  }
+}

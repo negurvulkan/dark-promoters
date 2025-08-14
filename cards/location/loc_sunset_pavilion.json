@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_sunset_pavilion",
+  "name": {
+    "en": "Sunset Pavilion",
+    "de": "Sonnenuntergang-Pavillon"
+  },
+  "rent": 1800,
+  "capacity": 400,
+  "style": {
+    "color": "#2d82d6"
+  }
+}

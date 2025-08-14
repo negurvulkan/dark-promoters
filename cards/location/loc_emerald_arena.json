@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_emerald_arena",
+  "name": {
+    "en": "Emerald Arena",
+    "de": "Smaragd-Arena"
+  },
+  "rent": 5000,
+  "capacity": 1200,
+  "style": {
+    "color": "#5b05a6"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_street_team_burst",
+  "name": {
+    "en": "Street Team Burst",
+    "de": "Straßenteam-Schub"
+  },
+  "cost": 1250,
+  "audience_pct": 0.083,
+  "style": {
+    "color": "#7ae143"
+  }
+}

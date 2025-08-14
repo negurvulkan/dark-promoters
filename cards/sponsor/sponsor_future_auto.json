@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_future_auto",
+  "name": {
+    "en": "Future Auto",
+    "de": "Future Auto"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 1000,
+  "style": {
+    "color": "#7ffffe"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_quantum_food",
+  "name": {
+    "en": "Quantum Food",
+    "de": "Quantum Lebensmittel"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 1300,
+  "style": {
+    "color": "#8f5c26"
+  }
+}

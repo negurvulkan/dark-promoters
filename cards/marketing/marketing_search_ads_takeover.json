@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_search_ads_takeover",
+  "name": {
+    "en": "Search Ads Takeover",
+    "de": "Suchanzeigen-Übernahme"
+  },
+  "cost": 1500,
+  "audience_pct": 0.098,
+  "style": {
+    "color": "#8bf253"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_ultra_telecom",
+  "name": {
+    "en": "Ultra Telecom",
+    "de": "Ultra Telekom"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 2200,
+  "style": {
+    "color": "#bd709e"
+  }
+}

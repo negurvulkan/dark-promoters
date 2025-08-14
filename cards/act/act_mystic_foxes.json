@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_mystic_foxes",
+  "name": {
+    "en": "Mystic Foxes",
+    "de": "Mystische Füchse"
+  },
+  "cost": 17500,
+  "audience_pct": 0.175,
+  "style": {
+    "color": "#749f33"
+  }
+}

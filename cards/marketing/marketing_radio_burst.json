@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_radio_burst",
+  "name": {
+    "en": "Radio Burst",
+    "de": "Radio-Schub"
+  },
+  "cost": 250,
+  "audience_pct": 0.023,
+  "style": {
+    "color": "#369d03"
+  }
+}

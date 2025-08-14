@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_influencer_series",
+  "name": {
+    "en": "Influencer Series",
+    "de": "Influencer-Serie"
+  },
+  "cost": 400,
+  "audience_pct": 0.032,
+  "style": {
+    "color": "#40da73"
+  }
+}

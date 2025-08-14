@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_podcast_push",
+  "name": {
+    "en": "Podcast Push",
+    "de": "Podcast-Push"
+  },
+  "cost": 1300,
+  "audience_pct": 0.086,
+  "style": {
+    "color": "#7e4b13"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_street_team_takeover",
+  "name": {
+    "en": "Street Team Takeover",
+    "de": "Straßenteam-Übernahme"
+  },
+  "cost": 500,
+  "audience_pct": 0.038,
+  "style": {
+    "color": "#47ae13"
+  }
+}

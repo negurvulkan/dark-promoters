@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_elite_telecom",
+  "name": {
+    "en": "Elite Telecom",
+    "de": "Elite Telekom"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 1200,
+  "style": {
+    "color": "#8a3d6e"
+  }
+}

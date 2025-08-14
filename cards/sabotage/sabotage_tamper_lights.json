@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_tamper_lights",
+  "name": {
+    "en": "Tamper Lights",
+    "de": "Lichter manipulieren"
+  },
+  "text": {
+    "en": "Target loses 120 audience",
+    "de": "Ziel verliert 120 Publikum"
+  },
+  "style": {
+    "color": "#be0238"
+  }
+}

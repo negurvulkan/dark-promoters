@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_search_ads_burst",
+  "name": {
+    "en": "Search Ads Burst",
+    "de": "Suchanzeigen-Schub"
+  },
+  "cost": 750,
+  "audience_pct": 0.053,
+  "style": {
+    "color": "#58bf23"
+  }
+}

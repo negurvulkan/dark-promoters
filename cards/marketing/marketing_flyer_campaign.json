@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_flyer_campaign",
+  "name": {
+    "en": "Flyer Campaign",
+    "de": "Flyer Kampagne"
+  },
+  "cost": 350,
+  "audience_pct": 0.029,
+  "style": {
+    "color": "#3d70a3"
+  }
+}

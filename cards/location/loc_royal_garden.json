@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_royal_garden",
+  "name": {
+    "en": "Royal Garden",
+    "de": "Königliche-Garten"
+  },
+  "rent": 2800,
+  "capacity": 650,
+  "style": {
+    "color": "#3bbbb7"
+  }
+}

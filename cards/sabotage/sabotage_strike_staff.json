@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_strike_staff",
+  "name": {
+    "en": "Strike Staff",
+    "de": "Personal bestreiken"
+  },
+  "text": {
+    "en": "Target loses 75 audience",
+    "de": "Ziel verliert 75 Publikum"
+  },
+  "style": {
+    "color": "#950c7b"
+  }
+}

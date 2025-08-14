@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_block_entrance",
+  "name": {
+    "en": "Block Entrance",
+    "de": "Eingang blockieren"
+  },
+  "text": {
+    "en": "Target loses 60 audience",
+    "de": "Ziel verliert 60 Publikum"
+  },
+  "style": {
+    "color": "#87653c"
+  }
+}

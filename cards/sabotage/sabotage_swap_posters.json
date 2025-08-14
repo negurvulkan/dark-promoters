@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_swap_posters",
+  "name": {
+    "en": "Swap Posters",
+    "de": "Poster austauschen"
+  },
+  "text": {
+    "en": "Target loses 95 audience",
+    "de": "Ziel verliert 95 Publikum"
+  },
+  "style": {
+    "color": "#a740cf"
+  }
+}

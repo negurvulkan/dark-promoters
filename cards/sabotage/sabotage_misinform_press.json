@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_misinform_press",
+  "name": {
+    "en": "Misinform Press",
+    "de": "Presse falsch informieren"
+  },
+  "text": {
+    "en": "Target loses 130 audience",
+    "de": "Ziel verliert 130 Publikum"
+  },
+  "style": {
+    "color": "#c71c62"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_crimson_wolves",
+  "name": {
+    "en": "Crimson Wolves",
+    "de": "Purpurne Wölfe"
+  },
+  "cost": 15000,
+  "audience_pct": 0.15,
+  "style": {
+    "color": "#60b5f9"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_press_push",
+  "name": {
+    "en": "Press Push",
+    "de": "Presse-Push"
+  },
+  "cost": 800,
+  "audience_pct": 0.056,
+  "style": {
+    "color": "#5c28f3"
+  }
+}

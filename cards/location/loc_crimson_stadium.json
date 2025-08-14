@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_crimson_stadium",
+  "name": {
+    "en": "Crimson Stadium",
+    "de": "Purpur-Stadion"
+  },
+  "rent": 2200,
+  "capacity": 500,
+  "style": {
+    "color": "#333330"
+  }
+}

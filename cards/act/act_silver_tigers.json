@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_silver_tigers",
+  "name": {
+    "en": "Silver Tigers",
+    "de": "Silberne Tiger"
+  },
+  "cost": 15500,
+  "audience_pct": 0.155,
+  "style": {
+    "color": "#64b16b"
+  }
+}

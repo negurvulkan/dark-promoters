@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_power_outage",
+  "name": {
+    "en": "Power Outage",
+    "de": "Stromausfall"
+  },
+  "text": {
+    "en": "Target loses 5 audience",
+    "de": "Ziel verliert 5 Publikum"
+  },
+  "style": {
+    "color": "#555555"
+  }
+}

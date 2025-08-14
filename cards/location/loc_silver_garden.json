@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_silver_garden",
+  "name": {
+    "en": "Silver Garden",
+    "de": "Silberne-Garten"
+  },
+  "rent": 6800,
+  "capacity": 1650,
+  "style": {
+    "color": "#749f3b"
+  }
+}

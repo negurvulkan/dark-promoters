@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_silver_bears",
+  "name": {
+    "en": "Silver Bears",
+    "de": "Silberne Bären"
+  },
+  "cost": 8000,
+  "audience_pct": 0.08,
+  "style": {
+    "color": "#28f5bd"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_crystal_lounge",
+  "name": {
+    "en": "Crystal Lounge",
+    "de": "Kristall Lounge"
+  },
+  "rent": 2400,
+  "capacity": 550,
+  "style": {
+    "color": "#360b5d"
+  }
+}

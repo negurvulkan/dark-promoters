@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_jam_signals",
+  "name": {
+    "en": "Jam Signals",
+    "de": "Signale stören"
+  },
+  "text": {
+    "en": "Target loses 40 audience",
+    "de": "Ziel verliert 40 Publikum"
+  },
+  "style": {
+    "color": "#7530e8"
+  }
+}

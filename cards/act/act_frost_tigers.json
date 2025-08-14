@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_frost_tigers",
+  "name": {
+    "en": "Frost Tigers",
+    "de": "Frostige Tiger"
+  },
+  "cost": 10500,
+  "audience_pct": 0.105,
+  "style": {
+    "color": "#3cdef7"
+  }
+}

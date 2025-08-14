@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_nova_tech",
+  "name": {
+    "en": "Nova Tech",
+    "de": "Nova Technik"
+  },
+  "min_slots": 1,
+  "payout_per_slot": 2600,
+  "style": {
+    "color": "#d1eb7e"
+  }
+}

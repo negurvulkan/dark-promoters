@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_electric_lions",
+  "name": {
+    "en": "Electric Lions",
+    "de": "Elektrische Löwen"
+  },
+  "cost": 7000,
+  "audience_pct": 0.07,
+  "style": {
+    "color": "#20fed9"
+  }
+}

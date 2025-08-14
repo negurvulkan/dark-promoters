@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_elite_bank",
+  "name": {
+    "en": "Elite Bank",
+    "de": "Elite Bank"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 2700,
+  "style": {
+    "color": "#d70a36"
+  }
+}

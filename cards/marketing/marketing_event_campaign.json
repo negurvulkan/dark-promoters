@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_event_campaign",
+  "name": {
+    "en": "Event Campaign",
+    "de": "Event-Kampagne"
+  },
+  "cost": 850,
+  "audience_pct": 0.059,
+  "style": {
+    "color": "#5f92c3"
+  }
+}

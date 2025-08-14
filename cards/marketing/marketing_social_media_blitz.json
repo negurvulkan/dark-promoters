@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_social_media_blitz",
+  "name": {
+    "en": "Social Media Blitz",
+    "de": "Social Media-Blitz"
+  },
+  "cost": 200,
+  "audience_pct": 0.02,
+  "style": {
+    "color": "#333333"
+  }
+}

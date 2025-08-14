@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_sunset_garden",
+  "name": {
+    "en": "Sunset Garden",
+    "de": "Sonnenuntergang-Garten"
+  },
+  "rent": 4800,
+  "capacity": 1150,
+  "style": {
+    "color": "#582d79"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_hyper_airlines",
+  "name": {
+    "en": "Hyper Airlines",
+    "de": "Hyper Fluglinien"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 3100,
+  "style": {
+    "color": "#eb8516"
+  }
+}

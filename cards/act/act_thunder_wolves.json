@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_thunder_wolves",
+  "name": {
+    "en": "Thunder Wolves",
+    "de": "Donner Wölfe"
+  },
+  "cost": 5000,
+  "audience_pct": 0.05,
+  "style": {
+    "color": "#111111"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_future_energy",
+  "name": {
+    "en": "Future Energy",
+    "de": "Future Energie"
+  },
+  "min_slots": 3,
+  "payout_per_slot": 2500,
+  "style": {
+    "color": "#ccccc6"
+  }
+}

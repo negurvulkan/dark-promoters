@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_lunar_cobras",
+  "name": {
+    "en": "Lunar Cobras",
+    "de": "Lunare Kobras"
+  },
+  "cost": 9000,
+  "audience_pct": 0.09,
+  "style": {
+    "color": "#30eca1"
+  }
+}

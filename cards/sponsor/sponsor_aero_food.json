@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_aero_food",
+  "name": {
+    "en": "Aero Food",
+    "de": "Aero Lebensmittel"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 3300,
+  "style": {
+    "color": "#f5c286"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_star_tech",
+  "name": {
+    "en": "Star Tech",
+    "de": "Star Technik"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 600,
+  "style": {
+    "color": "#6b851e"
+  }
+}

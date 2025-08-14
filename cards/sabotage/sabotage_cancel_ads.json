@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_cancel_ads",
+  "name": {
+    "en": "Cancel Ads",
+    "de": "Werbung stornieren"
+  },
+  "text": {
+    "en": "Target loses 110 audience",
+    "de": "Ziel verliert 110 Publikum"
+  },
+  "style": {
+    "color": "#b4e80e"
+  }
+}

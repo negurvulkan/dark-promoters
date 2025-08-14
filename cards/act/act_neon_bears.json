@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_neon_bears",
+  "name": {
+    "en": "Neon Bears",
+    "de": "Neon Bären"
+  },
+  "cost": 13000,
+  "audience_pct": 0.13,
+  "style": {
+    "color": "#50c831"
+  }
+}

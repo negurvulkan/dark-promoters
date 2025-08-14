@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_event_promo",
+  "name": {
+    "en": "Event Promo",
+    "de": "Event-Promo"
+  },
+  "cost": 1600,
+  "audience_pct": 0.104,
+  "style": {
+    "color": "#92c5f3"
+  }
+}

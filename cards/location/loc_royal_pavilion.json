@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_royal_pavilion",
+  "name": {
+    "en": "Royal Pavilion",
+    "de": "Königliche-Pavillon"
+  },
+  "rent": 5800,
+  "capacity": 1400,
+  "style": {
+    "color": "#66665a"
+  }
+}

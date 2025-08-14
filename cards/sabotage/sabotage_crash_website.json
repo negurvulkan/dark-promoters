@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_crash_website",
+  "name": {
+    "en": "Crash Website",
+    "de": "Website abstürzen lassen"
+  },
+  "text": {
+    "en": "Target loses 50 audience",
+    "de": "Ziel verliert 50 Publikum"
+  },
+  "style": {
+    "color": "#7e4b12"
+  }
+}

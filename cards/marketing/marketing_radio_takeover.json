@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_radio_takeover",
+  "name": {
+    "en": "Radio Takeover",
+    "de": "Radio Übernahme"
+  },
+  "cost": 1000,
+  "audience_pct": 0.068,
+  "style": {
+    "color": "#69d033"
+  }
+}

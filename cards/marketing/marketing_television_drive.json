@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_television_drive",
+  "name": {
+    "en": "Television Drive",
+    "de": "Fernsehen Aktion"
+  },
+  "cost": 1050,
+  "audience_pct": 0.071,
+  "style": {
+    "color": "#6d3a03"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "location",
+  "id": "loc_storm_hall",
+  "name": {
+    "en": "Storm Hall",
+    "de": "Sturm-Halle"
+  },
+  "rent": 3200,
+  "capacity": 750,
+  "style": {
+    "color": "#416c11"
+  }
+}

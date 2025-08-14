@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_social_media_spot",
+  "name": {
+    "en": "Social Media Spot",
+    "de": "Social Media-Spot"
+  },
+  "cost": 950,
+  "audience_pct": 0.065,
+  "style": {
+    "color": "#666663"
+  }
+}

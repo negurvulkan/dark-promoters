@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "act",
+  "id": "act_wild_owls",
+  "name": {
+    "en": "Wild Owls",
+    "de": "Wilde Eulen"
+  },
+  "cost": 8500,
+  "audience_pct": 0.085,
+  "style": {
+    "color": "#2cf12f"
+  }
+}

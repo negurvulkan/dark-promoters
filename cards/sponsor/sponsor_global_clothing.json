@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_global_clothing",
+  "name": {
+    "en": "Global Clothing",
+    "de": "Global Bekleidung"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 900,
+  "style": {
+    "color": "#7ae146"
+  }
+}

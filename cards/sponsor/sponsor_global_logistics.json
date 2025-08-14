@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "sponsor",
+  "id": "sponsor_global_logistics",
+  "name": {
+    "en": "Global Logistics",
+    "de": "Global Logistik"
+  },
+  "min_slots": 2,
+  "payout_per_slot": 2400,
+  "style": {
+    "color": "#c7ae0e"
+  }
+}

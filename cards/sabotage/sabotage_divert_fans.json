@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "type": "sabotage",
+  "id": "sabotage_divert_fans",
+  "name": {
+    "en": "Divert Fans",
+    "de": "Fans umlenken"
+  },
+  "text": {
+    "en": "Target loses 100 audience",
+    "de": "Ziel verliert 100 Publikum"
+  },
+  "style": {
+    "color": "#abcde4"
+  }
+}

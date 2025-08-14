@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "type": "marketing",
+  "id": "marketing_email_campaign",
+  "name": {
+    "en": "Email Campaign",
+    "de": "E-Mail-Kampagne"
+  },
+  "cost": 1350,
+  "audience_pct": 0.089,
+  "style": {
+    "color": "#81b4e3"
+  }
+}
