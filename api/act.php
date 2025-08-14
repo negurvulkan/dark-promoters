@@ -30,9 +30,125 @@ function db(): PDO {
     return $pdo;
 }
 
+function allowed_types_for_phase(string $phase): array {
+    return [
+        'finance1' => ['sponsor'],
+        'location' => ['location'],
+        'booking1' => ['act'],
+        'marketing1' => ['marketing'],
+        'sabotage' => ['sabotage'],
+        'finance2' => ['sponsor'],
+        'booking2' => ['act'],
+        'marketing2' => ['marketing'],
+        'event' => [],
+        'game_over' => [],
+    ][$phase] ?? [];
+}
+
+function next_phase(string $phase): string {
+    $order = ['finance1','location','booking1','marketing1','sabotage','finance2','booking2','marketing2','event','game_over'];
+    $idx = array_search($phase, $order, true);
+    return $order[$idx + 1] ?? $phase;
+}
+
+function apply_card_effect(array &$state, array $card, array $rules): void {
+    $type = $card['type'] ?? '';
+    if ($type === 'sponsor') {
+        $slots = (int)($card['min_slots'] ?? 0);
+        $payout = (float)($card['payout_per_slot'] ?? 0) * $slots;
+        $state['sponsor_payout'] = ($state['sponsor_payout'] ?? 0) + $payout;
+    } elseif ($type === 'location') {
+        if (isset($state['location'])) {
+            throw new RuntimeException('location already chosen');
+        }
+        $state['location'] = $card['id'] ?? '';
+        $state['capacity'] = (int)($card['capacity'] ?? 0);
+        $state['spend'] = ($state['spend'] ?? 0) + (float)($card['rent'] ?? 0);
+    } elseif ($type === 'act') {
+        $state['acts'] = $state['acts'] ?? [];
+        foreach ($state['acts'] as $a) {
+            if (($a['id'] ?? null) === ($card['id'] ?? null)) {
+                throw new RuntimeException('act already booked');
+            }
+        }
+        $state['acts'][] = $card;
+        $state['audience_pct_acts'] = ($state['audience_pct_acts'] ?? 0) + (float)($card['audience_pct'] ?? 0);
+        $state['spend'] = ($state['spend'] ?? 0) + (float)($card['cost'] ?? 0);
+    } elseif ($type === 'marketing') {
+        $state['marketing'] = $state['marketing'] ?? [];
+        $state['marketing'][] = $card;
+        $state['audience_pct_marketing'] = ($state['audience_pct_marketing'] ?? 0) + (float)($card['audience_pct'] ?? 0);
+        $state['spend'] = ($state['spend'] ?? 0) + (float)($card['cost'] ?? 0);
+    } elseif ($type === 'sabotage') {
+        $text = $card['text']['en'] ?? '';
+        if (preg_match('/-\s*(\d+)\s*audience/i', $text, $m)) {
+            $state['audience_penalty'] = ($state['audience_penalty'] ?? 0) + (int)$m[1];
+        }
+    }
+}
+
+function compute_score(array &$state, array $rules): void {
+    $mode = $state['mode'] ?? '';
+    $modeRules = $rules['modes'][$mode] ?? [];
+    $base = (float)($modeRules['audienceBase'] ?? 0);
+    $ticket = (float)($state['ticket_price'] ?? ($modeRules['ticketPriceDefault'] ?? 0));
+    $audience = $base * (1 + ($state['audience_pct_acts'] ?? 0)) * (1 + ($state['audience_pct_marketing'] ?? 0));
+    $audience -= $state['audience_penalty'] ?? 0;
+    if (isset($state['capacity'])) {
+        $audience = min($audience, (float)$state['capacity']);
+    }
+    $profit = ($ticket * $audience) + ($state['sponsor_payout'] ?? 0) - ($state['spend'] ?? 0);
+    $state['audience'] = $audience;
+    $state['profit'] = $profit;
+}
+
 function apply_action(array $state, array $action, array $rules): array {
-    // Placeholder: append action to log.
-    $state['log'][] = $action;
+    $state['log'] = $state['log'] ?? [];
+    $type = $action['type'] ?? '';
+    if ($type === 'play') {
+        $cardId = $action['card'] ?? null;
+        if (!$cardId) {
+            throw new RuntimeException('missing card');
+        }
+        $hand = $state['hand'] ?? [];
+        $card = null;
+        $index = null;
+        foreach ($hand as $i => $c) {
+            $id = is_array($c) ? ($c['id'] ?? null) : $c;
+            if ($id === $cardId) {
+                $card = is_array($c) ? $c : ['id' => $id];
+                $index = $i;
+                break;
+            }
+        }
+        if ($card === null) {
+            throw new RuntimeException('card not in hand');
+        }
+        $phase = $state['phase'] ?? '';
+        $allowed = allowed_types_for_phase($phase);
+        if (!in_array($card['type'] ?? '', $allowed, true)) {
+            throw new RuntimeException('card not allowed in phase');
+        }
+        array_splice($hand, $index, 1);
+        $state['hand'] = array_values($hand);
+        $state['table'] = $state['table'] ?? [];
+        $state['table'][] = $card;
+        apply_card_effect($state, $card, $rules);
+        $state['log'][] = "play {$cardId}";
+    } elseif ($type === 'next_phase') {
+        $state['phase'] = next_phase($state['phase'] ?? '');
+        $state['log'][] = "phase {$state['phase']}";
+        if ($state['phase'] === 'event') {
+            compute_score($state, $rules);
+            $state['winner'] = $state['winner'] ?? 'player';
+        } elseif ($state['phase'] === 'game_over') {
+            compute_score($state, $rules);
+            $reward = $rules['global']['winReward'] ?? 0;
+            $state['log'][] = "game over profit {$state['profit']} audience {$state['audience']} reward {$reward}";
+        }
+    } else {
+        $state['log'][] = ['unknown_action' => $action];
+    }
     return $state;
 }
 
