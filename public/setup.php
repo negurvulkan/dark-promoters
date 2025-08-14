@@ -24,11 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $cfg = require $configPath;
+
         $serverDsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};charset=utf8mb4";
         $pdo = new PDO($serverDsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $pdo->exec('CREATE DATABASE IF NOT EXISTS `'.$cfg['db_name'].'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
         $dsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']};charset=utf8mb4";
         $pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
         $migrationsDir = dirname(__DIR__) . '/migrations';
         $files = glob($migrationsDir . '/*.sql');
         natsort($files);

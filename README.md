@@ -3,12 +3,13 @@
 A lightweight, extensible **virtual trading card game** about organizing gothic/alt-scene events in NRW.  
 Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. All events happen **on the same day**. Sample cards live in `/cards` and a demo starter deck is in `/starter_decks`.
 
-- **Stack:** PHP 8 + MySQL/MariaDB + HTML/CSS + vanilla JS (no frameworks)
+- **Stack:** PHP 8 + PostgreSQL + HTML/CSS + vanilla JS (no frameworks)
 - **Cards as JSON files:** one file **per card** for drop-in extensibility
 - **Multilingual from the start:** **English + German** (UI + cards)
 - **Target:** fast prototyping, easy rules iteration, printable assets later
 
 ## Quick Start (dev)
+
 1. PHP 8 + MySQL or MariaDB installed.
 2. Run `php setup.php` and follow the prompts to create the database, apply migrations and write `config.php`. Alternatively, start a web server and visit `public/setup.php` for a graphical setup.
 3. Serve repo root via `php -S localhost:8080` (or your web server).

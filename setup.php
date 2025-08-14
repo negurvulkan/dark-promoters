@@ -15,9 +15,9 @@ function prompt(string $prompt, string $default = ''): string {
 
 // Collect DB credentials
 $host = prompt('DB host', 'localhost');
-$port = prompt('DB port', '3306');
+$port = prompt('DB port', '5432');
 $name = prompt('DB name', 'dark_promoters');
-$user = prompt('DB user', 'root');
+$user = prompt('DB user', 'postgres');
 $pass = prompt('DB password');
 
 // Write config.php
@@ -25,9 +25,11 @@ $configContent = "<?php\nreturn [\n    'db_host' => '" . addslashes($host) . "',
 file_put_contents(__DIR__ . '/config.php', $configContent);
 echo "config.php written\n";
 
+
 // Load config and connect to MySQL server
 $cfg = require __DIR__ . '/config.php';
 $dsnServer = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};charset=utf8mb4";
+
 try {
     $pdo = new PDO($dsnServer, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {
@@ -36,6 +38,7 @@ try {
 }
 
 // Create database if not exists
+
 $pdo->exec('CREATE DATABASE IF NOT EXISTS `'.$cfg['db_name'].'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 
 // Connect to target database

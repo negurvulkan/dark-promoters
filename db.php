@@ -12,6 +12,7 @@ function db(): PDO {
     }
     $cfg = require $configPath;
     $host = $cfg['db_host'] ?? 'localhost';
+
     $port = $cfg['db_port'] ?? '3306';
     $name = $cfg['db_name'] ?? 'dark_promoters';
     $user = $cfg['db_user'] ?? 'root';

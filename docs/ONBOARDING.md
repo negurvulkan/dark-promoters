@@ -4,7 +4,7 @@ Follow these steps to get a local instance of **Dark Promoters** running.
 
 ## Prerequisites
 - PHP 8
-- MySQL or MariaDB
+- PostgreSQL
 
 ## Setup
 1. Clone this repository.
