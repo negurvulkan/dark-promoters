@@ -93,6 +93,8 @@ Backend: simple API
 
     Optional: GET /api/stream.php?game_id=… → SSE push updates
 
+    POST /api/new_match.php → create match and auto-join creator
+
 Economy: Points & Packs
 
     - Users start with 1000 points—enough for a starter pack and some booster packs on day one. A daily top-up script (`tools/points_topup.php`) adds 100 points to every account.
