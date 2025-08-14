@@ -34,7 +34,7 @@ if (!$user || !password_verify($password, $user['password_hash'])) {
 
 $sessionToken = bin2hex(random_bytes(32));
 $pdo->beginTransaction();
-$stmt = $pdo->prepare("INSERT INTO sessions (user_id, session_token, expires_at) VALUES (:uid, :token, NOW() + INTERVAL '7 days')");
+$stmt = $pdo->prepare("INSERT INTO sessions (user_id, session_token, expires_at) VALUES (:uid, :token, DATE_ADD(NOW(), INTERVAL 7 DAY))");
 $stmt->execute([
     ':uid' => (int)$user['id'],
     ':token' => $sessionToken,
