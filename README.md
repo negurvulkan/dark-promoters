@@ -93,6 +93,35 @@ Backend: simple API
 
     Optional: GET /api/stream.php?game_id=… → SSE push updates
 
+Economy: Points & Packs
+
+    - Users start with 1000 points—enough for a starter pack and some booster packs on day one. A daily top-up script (`tools/points_topup.php`) adds 100 points to every account.
+    - Winning a game awards the `global.winReward` from the active ruleset (100 by default).
+    - GET /api/market.php → current point balance and available packs (from `packs.json`).
+      - `starter_pack` costs 100 points for 3 acts + 2 locations.
+      - `pro_pack` costs 500 points for 5 acts + 1 sponsor.
+    - POST /api/market.php → {pack_id} spends points and returns awarded card IDs.
+
+Inventory & Deck Building APIs
+
+    - GET /api/inventory.php → {points, inventory: [{card_id, qty}]}
+    - POST /api/inventory.php → {card_id, qty} to set quantity or remove a card.
+    - GET /api/decks.php → list decks, or `?id=` to fetch a single deck.
+    - POST /api/decks.php → create deck {name, cards[{card_id, qty}]} (validated against inventory).
+    - PUT /api/decks.php → update existing deck (inventory validation).
+    - DELETE /api/decks.php?id=… → remove deck.
+
+Frontend pages & example flow
+
+    - `/public/register.html` – create account
+    - `/public/login.html` – sign in
+    - `/public/market.html` – buy packs
+    - `/public/inventory.html` – view owned cards
+    - `/public/deckbuilder.html` – assemble decks
+    - `/public/index.html` – play a game
+
+  Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.
+
 Session tokens are stored in the `sessions` table with an expiry and returned by `/api/login.php`. Clients persist the token (e.g., `localStorage`) and send it on requests via `Authorization: Bearer <token>` or a `session_token` parameter. `/api/logout.php` deletes the token. Ensure migrations `001_initial.sql` and `002_add_password_hash.sql` are applied before using these endpoints.
 
 Game state is stored as JSON in the DB for quick iteration (games.state_json, versioned).
