@@ -9,7 +9,9 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 - **Target:** fast prototyping, easy rules iteration, printable assets later
 
 ## Quick Start (dev)
+
 1. PHP 8 + PostgreSQL installed.
+
 2. Run `php setup.php` and follow the prompts to create the database, apply migrations and write `config.php`. Alternatively, start a web server and visit `public/setup.php` for a graphical setup.
 3. Serve repo root via `php -S localhost:8080` (or your web server).
 4. Open `http://localhost:8080`.
