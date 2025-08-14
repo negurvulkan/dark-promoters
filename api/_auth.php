@@ -9,7 +9,13 @@ declare(strict_types=1);
  */
 function require_session(PDO $db): array {
     // Expect Authorization: Bearer <token>
-    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION']
+        ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION']
+        ?? '';
+    if ($authHeader === '' && function_exists('apache_request_headers')) {
+        $headers = apache_request_headers();
+        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    }
     if (stripos($authHeader, 'Bearer ') !== 0) {
         http_response_code(401);
         echo json_encode(['error' => 'missing Authorization header'], JSON_UNESCAPED_UNICODE);
