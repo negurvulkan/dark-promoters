@@ -122,7 +122,7 @@ Frontend pages & example flow
     - `/public/inventory.html` – view owned cards
     - `/public/deckbuilder.html` – assemble decks
     - `/public/index.html` – play a game
-    - `/public/admin.html` – admin dashboard (requires admin account)
+    - `/public/admin.html` – admin dashboard for user/points management (requires admin account)
 
   Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.
 
