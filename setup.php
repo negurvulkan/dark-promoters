@@ -3,14 +3,20 @@
 
 function prompt(string $prompt, string $default = ''): string {
     if ($default !== '') {
-        $prompt .= " [{$default}]";
+        $prompt .= " [$default]";
     }
     $prompt .= ': ';
-    $input = readline($prompt);
-    if ($input === false || $input === '') {
-        return $default;
+
+    // Use readline if available, otherwise read from STDIN
+    if (function_exists('readline')) {
+        $input = readline($prompt);
+    } else {
+        echo $prompt;
+        $input = fgets(STDIN);
     }
-    return $input;
+
+    $input = $input === false ? '' : trim($input);
+    return $input === '' ? $default : $input;
 }
 
 // Collect DB credentials
