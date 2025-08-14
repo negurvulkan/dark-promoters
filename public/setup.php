@@ -2,9 +2,9 @@
 // Web-based setup script to configure database and run migrations
 $default = [
     'db_host' => 'localhost',
-    'db_port' => '5432',
+    'db_port' => '3306',
     'db_name' => 'dark_promoters',
-    'db_user' => 'postgres',
+    'db_user' => 'root',
 ];
 
 $success = false;
@@ -24,18 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $cfg = require $configPath;
-        $serverDsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname=postgres";
+
+        $serverDsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};charset=utf8mb4";
         $pdo = new PDO($serverDsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        try {
-            $pdo->exec('CREATE DATABASE "' . $cfg['db_name'] . '"');
-        } catch (PDOException $e) {
-            if ($e->getCode() !== '42P04') {
-                throw $e;
-            }
-        }
-        $dsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']}";
+        $pdo->exec('CREATE DATABASE IF NOT EXISTS `'.$cfg['db_name'].'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
+        $dsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']};charset=utf8mb4";
         $pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-      
+
         $migrationsDir = dirname(__DIR__) . '/migrations';
         $files = glob($migrationsDir . '/*.sql');
         natsort($files);

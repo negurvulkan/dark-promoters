@@ -12,11 +12,12 @@ function db(): PDO {
     }
     $cfg = require $configPath;
     $host = $cfg['db_host'] ?? 'localhost';
-    $port = $cfg['db_port'] ?? '5432';
+
+    $port = $cfg['db_port'] ?? '3306';
     $name = $cfg['db_name'] ?? 'dark_promoters';
-    $user = $cfg['db_user'] ?? '';
+    $user = $cfg['db_user'] ?? 'root';
     $pass = $cfg['db_pass'] ?? '';
-    $dsn = "pgsql:host={$host};port={$port};dbname={$name}";
+    $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);

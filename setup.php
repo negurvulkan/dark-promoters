@@ -25,9 +25,11 @@ $configContent = "<?php\nreturn [\n    'db_host' => '" . addslashes($host) . "',
 file_put_contents(__DIR__ . '/config.php', $configContent);
 echo "config.php written\n";
 
-// Load config and connect to PostgreSQL server
+
+// Load config and connect to MySQL server
 $cfg = require __DIR__ . '/config.php';
-$dsnServer = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname=postgres";
+$dsnServer = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};charset=utf8mb4";
+
 try {
     $pdo = new PDO($dsnServer, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {
@@ -36,16 +38,11 @@ try {
 }
 
 // Create database if not exists
-try {
-    $pdo->exec('CREATE DATABASE "' . $cfg['db_name'] . '"');
-} catch (PDOException $e) {
-    if ($e->getCode() !== '42P04') {
-        throw $e;
-    }
-}
+
+$pdo->exec('CREATE DATABASE IF NOT EXISTS `'.$cfg['db_name'].'` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
 
 // Connect to target database
-$dsn = "pgsql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']}";
+$dsn = "mysql:host={$cfg['db_host']};port={$cfg['db_port']};dbname={$cfg['db_name']};charset=utf8mb4";
 $pdo = new PDO($dsn, $cfg['db_user'], $cfg['db_pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 echo "Database '{$cfg['db_name']}' ready\n";
