@@ -1,6 +1,8 @@
 {
   "card_viewer_title": "Card Viewer",
   "language_label": "Language:",
+  "welcome_title": "Dark Promoters",
+  "intro_text": "Organize gothic/alt-scene events and compete for the best show.",
   "inventory_title": "Inventory",
   "logout_button": "Logout",
   "filter_placeholder": "Filter cards",
