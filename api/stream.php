@@ -1,5 +1,7 @@
 <?php
-// Simple Server-Sent Events endpoint for game state updates.
+// Simple Server-Sent Events endpoint that emits an update when the
+// `games.version` field changes. Clients can then fetch the new state via
+// `state.php`.
 
 declare(strict_types=1);
 
@@ -24,18 +26,22 @@ function db(): PDO {
 $pdo = db();
 while (true) {
     $pdo->beginTransaction();
-    $stmt = $pdo->prepare('SELECT state_json, version FROM games WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT version FROM games WHERE id = ?');
     $stmt->execute([$game_id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $pdo->commit();
-    if ($row && (int)$row['version'] > $last_id) {
-        $state = $row['state_json'];
+
+    if ($row) {
         $id = (int)$row['version'];
-        echo "id: {$id}\n";
-        echo "data: {$state}\n\n";
-        @ob_flush();
-        @flush();
-        $last_id = $id;
+        if ($id > $last_id) {
+            echo "id: {$id}\n";
+            echo 'data: {"version": ' . $id . "}\n\n";
+            @ob_flush();
+            @flush();
+            $last_id = $id;
+        }
     }
+
     sleep(1);
 }
+
