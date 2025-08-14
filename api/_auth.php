@@ -2,28 +2,21 @@
 declare(strict_types=1);
 
 /**
- * Require a valid session based on Authorization header or session_token parameter.
+ * Require a valid session based on an Authorization header.
  *
  * @param PDO $db Database connection
  * @return array Authenticated user as ['id' => int, 'username' => string, 'is_admin' => int]
  */
 function require_session(PDO $db): array {
-    $token = '';
-
-    // Check Authorization: Bearer <token> header
+    // Expect Authorization: Bearer <token>
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    if (stripos($authHeader, 'Bearer ') === 0) {
-        $token = substr($authHeader, 7);
+    if (stripos($authHeader, 'Bearer ') !== 0) {
+        http_response_code(401);
+        echo json_encode(['error' => 'missing Authorization header'], JSON_UNESCAPED_UNICODE);
+        exit;
     }
 
-    // Fallback to session_token parameter (GET/POST)
-    if ($token === '') {
-        $param = $_REQUEST['session_token'] ?? '';
-        if (is_string($param)) {
-            $token = $param;
-        }
-    }
-
+    $token = trim(substr($authHeader, 7));
     if ($token === '') {
         http_response_code(401);
         echo json_encode(['error' => 'missing session token'], JSON_UNESCAPED_UNICODE);

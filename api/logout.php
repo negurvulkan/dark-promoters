@@ -7,18 +7,17 @@ require_once __DIR__ . '/../db.php';
 
 header('Content-Type: application/json');
 
-$sessionToken = $_SERVER['HTTP_X_SESSION_TOKEN'] ?? $_SERVER['HTTP_SESSION_TOKEN'] ?? '';
-if ($sessionToken === '') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if (is_array($input)) {
-        $sessionToken = trim((string)($input['session_token'] ?? ''));
-    }
+$authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+if (stripos($authHeader, 'Bearer ') !== 0) {
+    http_response_code(401);
+    echo json_encode(['error' => 'missing Authorization header'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
-$sessionToken = trim($sessionToken);
+$sessionToken = trim(substr($authHeader, 7));
 if ($sessionToken === '') {
-    http_response_code(400);
-    echo json_encode(['error' => 'missing session_token']);
+    http_response_code(401);
+    echo json_encode(['error' => 'missing session token'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
