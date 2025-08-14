@@ -12,10 +12,24 @@ async function sendAuth(url, data) {
 document.addEventListener('DOMContentLoaded', () => {
   const authLinks = document.getElementById('auth_links');
   const userLinks = document.getElementById('user_links');
+  const adminLink = document.getElementById('admin_link');
   if (authLinks && userLinks) {
     const token = localStorage.getItem('session_token');
     authLinks.style.display = token ? 'none' : '';
     userLinks.style.display = token ? '' : 'none';
+    if (adminLink) {
+      if (!token) {
+        adminLink.style.display = 'none';
+      } else {
+        fetch('/api/admin/user_stats.php', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }).then(res => {
+          adminLink.style.display = res.ok ? '' : 'none';
+        }).catch(() => {
+          adminLink.style.display = 'none';
+        });
+      }
+    }
   }
 
   const loginForm = document.getElementById('login_form');

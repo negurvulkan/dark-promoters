@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Require a valid session based on Authorization header or session_token parameter.
  *
  * @param PDO $db Database connection
- * @return array Authenticated user as ['id' => int, 'username' => string]
+ * @return array Authenticated user as ['id' => int, 'username' => string, 'is_admin' => int]
  */
 function require_session(PDO $db): array {
     $token = '';
@@ -30,7 +30,7 @@ function require_session(PDO $db): array {
         exit;
     }
 
-    $stmt = $db->prepare('SELECT u.id, u.username FROM sessions s JOIN users u ON s.user_id = u.id WHERE s.session_token = ? AND s.expires_at > NOW()');
+    $stmt = $db->prepare('SELECT u.id, u.username, u.is_admin FROM sessions s JOIN users u ON s.user_id = u.id WHERE s.session_token = ? AND s.expires_at > NOW()');
     $stmt->execute([$token]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,6 +43,23 @@ function require_session(PDO $db): array {
     return [
         'id' => (int)$user['id'],
         'username' => $user['username'],
+        'is_admin' => (int)$user['is_admin'],
     ];
+}
+
+/**
+ * Require that the current session belongs to an admin user.
+ *
+ * @param PDO $db Database connection
+ * @return array Authenticated admin user
+ */
+function require_admin(PDO $db): array {
+    $user = require_session($db);
+    if ($user['is_admin'] === 1) {
+        return $user;
+    }
+    http_response_code(403);
+    echo json_encode(['error' => 'admin required'], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
