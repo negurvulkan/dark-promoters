@@ -42,5 +42,10 @@
   "players_header": "Players",
   "actions_header": "Actions",
   "join_button": "Join",
-  "start_button": "Start"
+  "start_button": "Start",
+  "nav_inventory": "Inventory",
+  "nav_market": "Market",
+  "nav_deckbuilder": "Deck Builder",
+  "nav_matches": "Matches",
+  "nav_admin": "Admin"
 }

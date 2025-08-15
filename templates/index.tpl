@@ -3,16 +3,7 @@
   <main class="container py-4">
     <h1 class="mb-4" data-i18n="welcome_title">{$title}</h1>
     <p data-i18n="intro_text">Organize gothic/alt-scene events and compete for the best show.</p>
-    {if $is_logged_in}
-    <div id="user_links" class="mt-3">
-      {foreach from=$user_links item=link}
-      <a href="{$link.href}" class="btn btn-primary me-2 mb-2" data-i18n="{$link.key}">{$link.text}</a>
-      {/foreach}
-      {if $show_admin}
-      <a id="admin_link" href="public/admin.php" class="btn btn-warning mb-2">Admin</a>
-      {/if}
-    </div>
-    {else}
+    {if !$is_logged_in}
     <div id="auth_links" class="mt-3">
       <a href="public/login.php" class="btn btn-primary me-2" data-i18n="login_button">Login</a>
       <a href="public/register.php" class="btn btn-secondary" data-i18n="register_button">Register</a>
