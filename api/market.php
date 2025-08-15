@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         break;
       }
       $cardId = $choices[array_rand($choices)];
-      $stmt = $pdo->prepare('INSERT INTO card_inventory (user_id, card_id, qty) VALUES (:uid, :cid, 1) ON CONFLICT (user_id, card_id) DO UPDATE SET qty = card_inventory.qty + 1');
+      $stmt = $pdo->prepare('INSERT INTO card_inventory (user_id, card_id, qty) VALUES (:uid, :cid, 1) ON DUPLICATE KEY UPDATE qty = qty + 1');
       $stmt->execute([':uid' => $user['id'], ':cid' => $cardId]);
       $awarded[] = $cardId;
     }
