@@ -21,27 +21,36 @@ $host_user_id = isset($input['host_user_id']) ? (int)$input['host_user_id'] : 0;
 $ruleset_id = $input['ruleset_id'] ?? 'default.latest';
 $initial_state = $input['state'] ?? [];
 $match_id = isset($input['match_id']) ? (int)$input['match_id'] : null;
+$mode = isset($input['mode']) ? (string)$input['mode'] : '';
 
-if ($host_user_id <= 0 || !is_array($initial_state)) {
+if ($host_user_id <= 0 || !is_array($initial_state) || $mode === '') {
     http_response_code(400);
     echo json_encode(['error' => 'missing fields']);
     exit;
 }
 
 try {
+    $loaded = load_ruleset($ruleset_id);
+    if (!isset($loaded['data']['modes'][$mode])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'invalid mode'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    $initial_state['mode'] = $mode;
+
     $pdo = db();
     $pdo->beginTransaction();
     $result = create_game($pdo, $host_user_id, $ruleset_id, $initial_state, $match_id);
     $pdo->commit();
     echo json_encode($result, JSON_UNESCAPED_UNICODE);
 } catch (RuntimeException $e) {
-    if ($pdo->inTransaction()) {
+    if (isset($pdo) && $pdo->inTransaction()) {
         $pdo->rollBack();
     }
     http_response_code(400);
     echo json_encode(['error' => 'invalid ruleset'], JSON_UNESCAPED_UNICODE);
 } catch (Throwable $e) {
-    if ($pdo->inTransaction()) {
+    if (isset($pdo) && $pdo->inTransaction()) {
         $pdo->rollBack();
     }
     http_response_code(500);
