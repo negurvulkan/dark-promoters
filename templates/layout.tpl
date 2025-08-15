@@ -17,6 +17,17 @@
         <option value="de">DE</option>
       </select>
     </div>
+    {if $is_logged_in}
+    <nav class="navbar navbar-expand">
+      <ul class="navbar-nav">
+        {foreach from=$nav_links item=link}
+        {if $link.key != 'nav_admin' || $show_admin}
+        <li class="nav-item"><a class="nav-link" href="{$link.href}" data-i18n="{$link.key}">{$i18n[$link.key]}</a></li>
+        {/if}
+        {/foreach}
+      </ul>
+    </nav>
+    {/if}
     {if $show_logout}
     <button id="logout_btn" class="btn btn-secondary btn-sm" data-i18n="logout_button">Logout</button>
     {/if}
