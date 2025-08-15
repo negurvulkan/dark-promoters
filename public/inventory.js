@@ -10,13 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const pointsEl = document.getElementById('points');
   let inventory = [];
 
-  async function loadInventory() {
-    try {
-      const res = await fetch('/api/inventory.php', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+    async function loadInventory() {
+      try {
+        const res = await fetch('/api/inventory.php', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          credentials: 'same-origin'
+        });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || json.error) {
         if (res.status === 401) {

@@ -9,13 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const tbody = document.getElementById('packs_body');
   let packs = [];
 
-  async function load() {
-    try {
-      const res = await fetch('/api/market.php', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+    async function load() {
+      try {
+        const res = await fetch('/api/market.php', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          credentials: 'same-origin'
+        });
       const json = await res.json().catch(() => ({}));
       if (!res.ok || json.error) {
         if (res.status === 401) {
@@ -37,14 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function buy(id) {
     try {
-      const res = await fetch('/api/market.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ pack_id: id })
-      });
+        const res = await fetch('/api/market.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          credentials: 'same-origin',
+          body: JSON.stringify({ pack_id: id })
+        });
       const json = await res.json();
       if (json.error) {
         alert(json.error || (window.i18n ? window.i18n.t('purchase_failed') : 'Purchase failed'));
