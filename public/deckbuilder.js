@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deckNameInput.value = '';
         currentDeckId = null;
         renderDeck();
-        loadDecks();
+        await loadDecks();
         deckListSelect.value = '';
       }
     } catch (err) {
