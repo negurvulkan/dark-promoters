@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title data-i18n="matches_title">Matches</title>
-</head>
-<body>
-  <header>
-    <label for="lang-switch" data-i18n="language_label">Language:</label>
-    <select id="lang-switch">
-      <option value="en">EN</option>
-      <option value="de">DE</option>
-    </select>
-    <button id="logout_btn" data-i18n="logout_button">Logout</button>
-  </header>
-  <h1 data-i18n="matches_title">Matches</h1>
+{assign var='title' value='Matches'}
+{capture name='content'}
+  <h1 data-i18n="matches_title">{$title}</h1>
   <form id="create_match_form">
     <label for="match_name" data-i18n="match_name_label">Name:</label>
     <input type="text" id="match_name" name="name" required>
@@ -31,8 +18,5 @@
     </thead>
     <tbody id="matches_body"></tbody>
   </table>
-  <script src="i18n.js"></script>
-  <script src="auth.js"></script>
-  <script src="matches.js"></script>
-</body>
-</html>
+{/capture}
+{include file='layout.tpl' title=$title show_logout=true scripts=['i18n.js','auth.js','matches.js'] content=$smarty.capture.content}

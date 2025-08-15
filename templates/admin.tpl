@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Admin</title>
-</head>
-<body>
+{assign var='title' value='Admin'}
+{capture name='content'}
   <h1>Admin</h1>
   <nav>
     <button id="load_rulesets">Rulesets</button>
@@ -13,6 +8,5 @@
   </nav>
   <pre id="admin_output"></pre>
   <div id="users"></div>
-  <script src="admin.js"></script>
-</body>
-</html>
+{/capture}
+{include file='layout.tpl' title=$title scripts=['admin.js'] content=$smarty.capture.content}
