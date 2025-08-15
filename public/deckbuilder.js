@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const token = localStorage.getItem('session_token');
   if (!token) {
     window.location.href = 'login.php';
@@ -15,6 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
   let inventory = [];
   const deck = {};
   let currentDeckId = null;
+  const cardInfo = {};
+
+  async function loadCardInfo() {
+    try {
+      const res = await fetch('/api/cards.php');
+      const json = await res.json();
+      (json.cards || []).forEach(card => {
+        let name = '';
+        if (typeof card.name === 'string') {
+          name = card.name;
+        } else if (card.name && typeof card.name === 'object') {
+          name = card.name.en || Object.values(card.name)[0];
+        } else {
+          name = card.id;
+        }
+        cardInfo[card.id] = { ...card, displayName: name };
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   async function loadInventory() {
     try {
@@ -42,10 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderInventory() {
     inventoryDiv.innerHTML = '';
     inventory.forEach(item => {
+      const info = cardInfo[item.card_id];
+      const name = info ? info.displayName : item.card_id;
       const div = document.createElement('div');
-      div.textContent = `${item.card_id} (${item.qty})`;
+      div.textContent = `${name} (${item.qty})`;
       div.draggable = true;
       div.dataset.cardId = item.card_id;
+      if (info) {
+        div.title = `ID: ${info.id}\nType: ${info.type || ''}`;
+      }
       div.addEventListener('dragstart', e => {
         e.dataTransfer.setData('card_id', item.card_id);
       });
@@ -57,8 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderDeck() {
     deckDiv.innerHTML = '';
     Object.entries(deck).forEach(([cid, qty]) => {
+      const info = cardInfo[cid];
+      const name = info ? info.displayName : cid;
       const div = document.createElement('div');
-      div.textContent = `${cid} x${qty}`;
+      div.textContent = `${name} x${qty}`;
+      if (info) {
+        div.title = `ID: ${info.id}\nType: ${info.type || ''}`;
+      }
       div.addEventListener('click', () => {
         deck[cid]--;
         if (deck[cid] <= 0) delete deck[cid];
@@ -189,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentDeckId) deleteDeck(currentDeckId);
   });
 
-  loadInventory();
-  loadDecks();
+  await loadCardInfo();
+  await loadInventory();
+  await loadDecks();
 });
