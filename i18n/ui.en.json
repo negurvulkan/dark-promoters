@@ -43,6 +43,7 @@
   "actions_header": "Actions",
   "join_button": "Join",
   "start_button": "Start",
+  "add_ai_button": "Add AI",
   "nav_inventory": "Inventory",
   "nav_market": "Market",
   "nav_deckbuilder": "Deck Builder",
@@ -50,5 +51,6 @@
   "nav_admin": "Admin",
   "play_ai_button": "Play vs AI",
   "ai_play": "AI plays",
-  "ai_next_phase": "AI ends phase"
+  "ai_next_phase": "AI ends phase",
+  "ai_bot": "AI Bot"
 }

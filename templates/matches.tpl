@@ -25,6 +25,10 @@
       </thead>
       <tbody id="matches_body"></tbody>
     </table>
+    <template id="creator_actions_template">
+      <button type="button" class="add-ai-btn"></button>
+      <button type="button" class="start-btn"></button>
+    </template>
   </main>
 {/capture}
 {include file='layout.tpl' title=$title show_logout=true scripts=['i18n.js','auth.js','matches.js'] content=$smarty.capture.content}

@@ -43,6 +43,7 @@
   "actions_header": "Aktionen",
   "join_button": "Beitreten",
   "start_button": "Starten",
+  "add_ai_button": "KI hinzufügen",
   "nav_inventory": "Inventar",
   "nav_market": "Markt",
   "nav_deckbuilder": "Deckbauer",
@@ -50,5 +51,6 @@
   "nav_admin": "Admin",
   "play_ai_button": "Gegen KI spielen",
   "ai_play": "KI spielt",
-  "ai_next_phase": "KI beendet Phase"
+  "ai_next_phase": "KI beendet Phase",
+  "ai_bot": "KI-Bot"
 }
