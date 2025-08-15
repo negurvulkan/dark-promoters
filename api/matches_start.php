@@ -64,10 +64,10 @@ try {
             $human_count++;
         }
     }
-    if ($human_count < 1 || $ai_count < 1) {
+    if ($human_count < 1 || ($human_count + $ai_count) < 2) {
         $pdo->rollBack();
         http_response_code(400);
-        echo json_encode(['error' => 'not enough players'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['error' => 'need at least two players incl. one human'], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
