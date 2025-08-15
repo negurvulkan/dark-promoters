@@ -86,6 +86,9 @@ function apply_card_effect(array &$state, array $card, array $rules): void {
 function compute_score(array &$state, array $rules): void {
     $mode = $state['mode'] ?? '';
     $modeRules = $rules['modes'][$mode] ?? [];
+    if (empty($modeRules)) {
+        throw new RuntimeException('unknown mode');
+    }
     $base = (float)($modeRules['audienceBase'] ?? 0);
     $ticket = (float)($state['ticket_price'] ?? ($modeRules['ticketPriceDefault'] ?? 0));
     $audience = $base * (1 + ($state['audience_pct_acts'] ?? 0)) * (1 + ($state['audience_pct_marketing'] ?? 0));
@@ -188,6 +191,9 @@ try {
     } elseif ($e->getMessage() === 'Game not found') {
         http_response_code(404);
         echo json_encode(['error' => 'game not found']);
+    } elseif ($e->getMessage() === 'unknown mode') {
+        http_response_code(400);
+        echo json_encode(['error' => 'unknown mode']);
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'server error']);
