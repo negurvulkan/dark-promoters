@@ -28,6 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function addCardToDeck(cid) {
+    const inv = inventory.find(i => i.card_id === cid);
+    if (!inv) return;
+    const current = deck[cid] || 0;
+    if (current < inv.qty) {
+      deck[cid] = current + 1;
+      renderDeck();
+    }
+  }
+
   function renderInventory() {
     inventoryDiv.innerHTML = '';
     inventory.forEach(item => {
@@ -36,8 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
       div.draggable = true;
       div.dataset.cardId = item.card_id;
       div.addEventListener('dragstart', e => {
-        e.dataTransfer.setData('text/plain', item.card_id);
+        e.dataTransfer.setData('card_id', item.card_id);
       });
+      div.addEventListener('click', () => addCardToDeck(item.card_id));
       inventoryDiv.appendChild(div);
     });
   }
@@ -59,14 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
   deckDiv.addEventListener('dragover', e => e.preventDefault());
   deckDiv.addEventListener('drop', e => {
     e.preventDefault();
-    const cid = e.dataTransfer.getData('text/plain');
-    const inv = inventory.find(i => i.card_id === cid);
-    if (!inv) return;
-    const current = deck[cid] || 0;
-    if (current < inv.qty) {
-      deck[cid] = current + 1;
-      renderDeck();
-    }
+    const cid = e.dataTransfer.getData('card_id');
+    if (cid) addCardToDeck(cid);
   });
 
   async function loadDecks() {
