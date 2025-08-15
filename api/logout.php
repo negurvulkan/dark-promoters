@@ -37,5 +37,7 @@ require_session($pdo);
 $stmt = $pdo->prepare('DELETE FROM sessions WHERE session_token = ?');
 $stmt->execute([$sessionToken]);
 
+setcookie('session_token', '', time() - 3600, '/');
+
 echo json_encode(['success' => true], JSON_UNESCAPED_UNICODE);
 

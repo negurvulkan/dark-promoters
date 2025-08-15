@@ -43,6 +43,13 @@ $stmt->execute([
 ]);
 $pdo->commit();
 
+setcookie('session_token', $sessionToken, [
+    'expires' => time() + 60 * 60 * 24 * 7,
+    'path' => '/',
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
 $response = [
     'session_token' => $sessionToken,
     'user' => [
