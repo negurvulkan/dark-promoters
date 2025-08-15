@@ -5,5 +5,30 @@
   "global": {
     "winReward": 100
   },
-  "modes": {}
+  "modes": {
+    "club": {
+      "rounds": 2,
+      "startBudget": 1000,
+      "ticketPriceDefault": 10,
+      "audienceBase": 200
+    },
+    "party": {
+      "rounds": 2,
+      "startBudget": 1500,
+      "ticketPriceDefault": 15,
+      "audienceBase": 300
+    },
+    "1day": {
+      "rounds": 3,
+      "startBudget": 3000,
+      "ticketPriceDefault": 20,
+      "audienceBase": 600
+    },
+    "2day": {
+      "rounds": 3,
+      "startBudget": 5000,
+      "ticketPriceDefault": 25,
+      "audienceBase": 800
+    }
+  }
 }
