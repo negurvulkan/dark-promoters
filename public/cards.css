@@ -64,3 +64,19 @@ header {
   font-size: 0.8rem;
   overflow: auto;
 }
+
+.ai-card {
+  outline: 3px solid #ff5555;
+}
+
+.ai-notice {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #ff5555;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0.9;
+}

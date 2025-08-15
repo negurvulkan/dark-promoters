@@ -47,5 +47,8 @@
   "nav_market": "Market",
   "nav_deckbuilder": "Deck Builder",
   "nav_matches": "Matches",
-  "nav_admin": "Admin"
+  "nav_admin": "Admin",
+  "play_ai_button": "Play vs AI",
+  "ai_play": "AI plays",
+  "ai_next_phase": "AI ends phase"
 }

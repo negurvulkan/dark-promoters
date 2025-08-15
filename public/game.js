@@ -12,6 +12,8 @@
   let expectedVersion = 0;
   let currentState = null;
   let initialStateLoaded = false;
+  let lastLogLength = 0;
+  let lastTableLength = 0;
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -90,18 +92,72 @@
     logEl.innerHTML = '';
     entries.forEach(entry => {
       const div = document.createElement('div');
-      div.textContent = typeof entry === 'string' ? entry : JSON.stringify(entry);
+      if (typeof entry === 'string') {
+        div.textContent = formatLogEntry(entry);
+      } else {
+        div.textContent = JSON.stringify(entry);
+      }
       logEl.appendChild(div);
     });
   }
 
+  function formatLogEntry(entry) {
+    if (entry.startsWith('ai play ')) {
+      const card = entry.slice(8);
+      return `${window.i18n ? window.i18n.t('ai_play') : 'AI plays'} ${card}`;
+    }
+    if (entry === 'ai next_phase') {
+      return window.i18n ? window.i18n.t('ai_next_phase') : 'AI ends phase';
+    }
+    return entry;
+  }
+
+  function showAiNotice(text) {
+    const notice = document.createElement('div');
+    notice.className = 'ai-notice';
+    notice.textContent = text;
+    document.body.appendChild(notice);
+    setTimeout(() => notice.remove(), 2000);
+  }
+
+  function highlightAiCards(cardIds, startIndex) {
+    const cards = Array.from(tableEl.children).slice(startIndex);
+    cards.forEach((el, idx) => {
+      const card = (currentState.table || [])[startIndex + idx];
+      if (cardIds.includes(card.id)) {
+        el.classList.add('ai-card');
+      }
+    });
+  }
+
   function renderState(state) {
+    const prevLogLen = lastLogLength;
+    const prevTableLen = lastTableLength;
     currentState = state;
     phaseEl.textContent = state.phase || '';
     playerEl.textContent = state.current_player || '';
     renderZone(tableEl, state.table || [], false);
     renderZone(handEl, state.hand || [], true);
     renderLog(state.log || []);
+
+    const newLogs = (state.log || []).slice(prevLogLen);
+    const aiPlays = [];
+    newLogs.forEach(l => {
+      if (typeof l === 'string') {
+        if (l.startsWith('ai play ')) {
+          const card = l.slice(8);
+          aiPlays.push(card);
+          showAiNotice(`${window.i18n ? window.i18n.t('ai_play') : 'AI plays'} ${card}`);
+        } else if (l === 'ai next_phase') {
+          showAiNotice(window.i18n ? window.i18n.t('ai_next_phase') : 'AI ends phase');
+        }
+      }
+    });
+    if (aiPlays.length) {
+      highlightAiCards(aiPlays, prevTableLen);
+    }
+    lastLogLength = (state.log || []).length;
+    lastTableLength = (state.table || []).length;
   }
 
   async function loadState() {

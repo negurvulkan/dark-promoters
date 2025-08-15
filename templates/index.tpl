@@ -9,6 +9,9 @@
       <a href="public/register.php" class="btn btn-secondary" data-i18n="register_button">Register</a>
     </div>
     {/if}
+    <div class="mt-3">
+      <a href="public/game.php?vs_ai=1" class="btn btn-secondary" data-i18n="play_ai_button">Play vs AI</a>
+    </div>
   </main>
 {/capture}
 {include file='layout.tpl' title=$title css=['public/cards.css'] scripts=['public/i18n.js','public/auth.js','public/app.js'] content=$smarty.capture.content}
