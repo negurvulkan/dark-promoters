@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const deckNameInput = document.getElementById('deck_name');
   const deckListSelect = document.getElementById('deck_list_select');
   const saveBtn = document.getElementById('save_btn');
+  const deleteBtn = document.getElementById('delete_btn');
 
   let inventory = [];
   const deck = {};
@@ -96,6 +97,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  async function deleteDeck(id) {
+    try {
+      const res = await fetch(`/api/decks.php?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const json = await res.json();
+      if (json.error) {
+        alert(json.error);
+      } else {
+        alert('Deck deleted');
+        Object.keys(deck).forEach(k => delete deck[k]);
+        deckNameInput.value = '';
+        currentDeckId = null;
+        renderDeck();
+        await loadDecks();
+        deckListSelect.value = '';
+        deleteBtn.style.display = 'none';
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   deckListSelect.addEventListener('change', async () => {
     const id = deckListSelect.value;
     if (!id) {
@@ -103,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
       deckNameInput.value = '';
       Object.keys(deck).forEach(k => delete deck[k]);
       renderDeck();
+      deleteBtn.style.display = 'none';
       return;
     }
     try {
@@ -117,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deck[c.card_id] = c.qty;
       });
       renderDeck();
+      deleteBtn.style.display = 'inline-block';
     } catch (err) {
       console.error(err);
     }
@@ -151,10 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDeck();
         await loadDecks();
         deckListSelect.value = '';
+        deleteBtn.style.display = 'none';
       }
     } catch (err) {
       console.error(err);
     }
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    if (currentDeckId) deleteDeck(currentDeckId);
   });
 
   loadInventory();
