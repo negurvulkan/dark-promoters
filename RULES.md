@@ -226,13 +226,22 @@ OOH large €12k → +28%
 PR agency €6k → +15%
 
 ---
+ 
+## 9) Playing Against the Computer
+- The game includes a simple AI opponent for solo play.
+- After each of your actions, the AI immediately resolves its turn.
+- On its turn, the AI draws the top card of its deck.
+- It randomly plays a card allowed in the current phase; if none are playable, it advances to the next phase.
+- The AI does not adjust ticket prices or plan ahead—it’s meant for quick testing and has limited strategy.
 
-## 9) Glossary
+---
+
+## 10) Glossary
 - **Unique:** Only one copy can exist in play (global) for the entire game.
 - **Slots:** Personal Sponsor capacity (6 total, no halves).
 - **Exclusive (Sponsor):** Costs +1 slot, grants +25% payout, locks that Sponsor for others.
 
-## 10) Changelog
+## 11) Changelog
 - v0.3: realistic mode values; exclusive sponsor +25% (+1 slot); soft caps; price band timing.
 - v0.2: phase structure; uniqueness; sponsor slots.
 - v0.1: initial concept.

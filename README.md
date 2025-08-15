@@ -14,6 +14,7 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 2. Run `php setup.php` and follow the prompts to create the database, apply migrations and write `config.php`. Alternatively, start a web server and visit `setup.php` for a graphical setup.
 3. Serve repo root via `php -S localhost:8080` (or your web server).
 4. Open `http://localhost:8080`.
+5. For a quick solo test, visit `http://localhost:8080/public/game.php?vs_ai=1` to play against the computer.
 
 For detailed onboarding steps see `docs/ONBOARDING.md`.
 
@@ -140,9 +141,10 @@ Frontend pages & example flow
     - `/public/inventory.php` – view owned cards
     - `/public/deckbuilder.php` – assemble decks
       - `/index.php` – play a game
+    - `/public/game.php?vs_ai=1` – quick match against the computer
     - `/public/admin.php` – admin dashboard for user/points management (requires admin account)
 
-  Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.
+  Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game. For a quick AI match, open `public/game.php?vs_ai=1`.
 
 Session tokens are stored in the `sessions` table with an expiry and returned by `/api/login.php`. Clients persist the token (e.g., `localStorage`) and send it on requests via `Authorization: Bearer <token>`. `/api/logout.php` deletes the token. Ensure migrations `001_initial.sql` and `002_add_password_hash.sql` are applied before using these endpoints.
 
