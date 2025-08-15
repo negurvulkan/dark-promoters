@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('session_token');
   if (!token) {
-    window.location.href = 'login.html';
+    window.location.href = 'login.php';
     return;
   }
 
