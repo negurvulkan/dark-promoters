@@ -215,13 +215,22 @@ OOH Großflächen 12 k € → +28 %
 PR-Agentur 6 k € → +15 %
 
 ---
+ 
+## 9) Spiele gegen Computer
+- Das Spiel enthält einen einfachen KI-Gegner für Solo-Runden.
+- Nach jedem deiner Züge führt die KI sofort ihren Zug aus.
+- In ihrem Zug zieht die KI die oberste Karte ihres Decks.
+- Sie spielt zufällig eine Karte, die in der aktuellen Phase erlaubt ist; kann sie nichts spielen, geht sie in die nächste Phase.
+- Die KI passt keine Ticketpreise an und plant nicht voraus – sie dient vor allem zum schnellen Testen.
 
-## 9) Glossar
+---
+
+## 10) Glossar
 - **Einzigartig:** Karte kann im gesamten Spiel nur **einmal** im Spiel sein (global).
 - **Slots:** Eigene Sponsor-Kapazität (6 gesamt; keine halben Slots).
 - **Exklusiv (Sponsor):** Kostet **+1 Slot**, gibt **+25 %** Payout, sperrt diesen Sponsor für andere.
 
-## 10) Changelog
+## 11) Changelog
 - v0.3: realistische Modus-Werte; Sponsor Exklusiv +25 % (+1 Slot); Soft-Caps; Ticketpreis-Timing.
 - v0.2: Phasenstruktur; Einzigartigkeit; Sponsor-Slots.
 - v0.1: Grundidee.
