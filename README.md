@@ -40,7 +40,8 @@ Run `composer install` to fetch dependencies, including [Smarty](https://www.sma
 /cards/        # one JSON per card
 /starter_decks/# sample starter decks
 /i18n/        # ui.en.json, ui.de.json (UI strings)
-/public/       # index.php, cards.css, app.js
+  /public/       # cards.css, app.js
+  index.php      # entry point
 /docs/         # RULES.md (EN), RULES.de.md (DE), ONBOARDING.md, CONTRIBUTING.md, AGENTS.md
 /migrations/   # SQL schema migrations
 /rulesets/     # versioned ruleset JSON
@@ -138,7 +139,7 @@ Frontend pages & example flow
     - `/public/market.php` – buy packs
     - `/public/inventory.php` – view owned cards
     - `/public/deckbuilder.php` – assemble decks
-    - `/public/index.php` – play a game
+      - `/index.php` – play a game
     - `/public/admin.php` – admin dashboard for user/points management (requires admin account)
 
   Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.

@@ -4,7 +4,7 @@
     {if $success}
       <h1>Setup Complete</h1>
       <p>Database configured and migrations applied.</p>
-      <p><a href="index.php" class="btn btn-primary">Go to application</a></p>
+      <p><a href="/index.php" class="btn btn-primary">Go to application</a></p>
     {else}
       <h1>Dark Promoters Setup</h1>
       {if $error}
