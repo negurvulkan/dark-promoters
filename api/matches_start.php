@@ -63,7 +63,7 @@ try {
     }
 
     $initial_state = [];
-    $result = create_game($pdo, $user['id'], $ruleset_id, $initial_state, $match_id);
+    $result = create_game($pdo, $user['id'], $ruleset_id, $initial_state, $match_id, false);
     $game_id = $result['game_id'];
 
     $insert = $pdo->prepare('INSERT INTO game_players (game_id, user_id) VALUES (:gid, :uid)');

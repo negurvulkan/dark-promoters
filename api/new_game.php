@@ -22,6 +22,7 @@ $ruleset_id = $input['ruleset_id'] ?? 'default.latest';
 $initial_state = $input['state'] ?? [];
 $match_id = isset($input['match_id']) ? (int)$input['match_id'] : null;
 $mode = isset($input['mode']) ? (string)$input['mode'] : '';
+$vs_ai = !empty($input['vs_ai']);
 
 if ($host_user_id <= 0 || !is_array($initial_state) || $mode === '') {
     http_response_code(400);
@@ -40,7 +41,7 @@ try {
 
     $pdo = db();
     $pdo->beginTransaction();
-    $result = create_game($pdo, $host_user_id, $ruleset_id, $initial_state, $match_id);
+    $result = create_game($pdo, $host_user_id, $ruleset_id, $initial_state, $match_id, $vs_ai);
     $pdo->commit();
     echo json_encode($result, JSON_UNESCAPED_UNICODE);
 } catch (RuntimeException $e) {
