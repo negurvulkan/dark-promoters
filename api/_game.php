@@ -38,21 +38,30 @@ function load_all_cards(): array {
  * Create a new game row and return identifiers.
  * Caller must handle transactions.
  */
-function create_game(PDO $pdo, int $host_user_id, string $ruleset_id, array $initial_state, ?int $match_id = null, bool $vs_ai = false): array {
+function create_game(PDO $pdo, int $host_user_id, string $ruleset_id, array $initial_state, ?int $match_id = null, int $ai_count = 0): array {
     $loaded = load_ruleset($ruleset_id);
     $ruleset_id = $loaded['id'];
     $rules_snapshot = $loaded['data'];
 
     $initial_state['version'] = $initial_state['version'] ?? 0;
 
-    if ($vs_ai) {
+    if ($ai_count > 0) {
         $initial_state['ai_enabled'] = true;
-        $allCards = array_values(load_all_cards());
-        shuffle($allCards);
-        $initial_state['ai_deck'] = $allCards;
-        $initial_state['ai_hand'] = [];
-        for ($i = 0; $i < 5 && $initial_state['ai_deck']; $i++) {
-            $initial_state['ai_hand'][] = array_shift($initial_state['ai_deck']);
+        $initial_state['ai_players'] = [];
+        $baseCards = array_values(load_all_cards());
+        for ($n = 0; $n < $ai_count; $n++) {
+            $deck = $baseCards;
+            shuffle($deck);
+            $hand = [];
+            for ($i = 0; $i < 5 && $deck; $i++) {
+                $hand[] = array_shift($deck);
+            }
+            $initial_state['ai_players'][] = ['deck' => $deck, 'hand' => $hand];
+            if ($n === 0) {
+                // Backward compatibility for single AI helpers
+                $initial_state['ai_deck'] = $deck;
+                $initial_state['ai_hand'] = $hand;
+            }
         }
     }
 
