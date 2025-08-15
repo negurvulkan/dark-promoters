@@ -1,12 +1,11 @@
 <?php
-// Start a match and create a linked game.
+// Add an AI player to a match.
 
 declare(strict_types=1);
 
 $smarty = require __DIR__ . '/../src/bootstrap.php';
 
 require_once __DIR__ . '/_auth.php';
-require_once __DIR__ . '/_game.php';
 require_once __DIR__ . '/../db.php';
 
 header('Content-Type: application/json');
@@ -19,7 +18,6 @@ if (!is_array($input)) {
 }
 
 $match_id = isset($input['match_id']) ? (int)$input['match_id'] : 0;
-$ruleset_id = $input['ruleset_id'] ?? 'default.latest';
 if ($match_id <= 0) {
     http_response_code(400);
     echo json_encode(['error' => 'missing match_id'], JSON_UNESCAPED_UNICODE);
@@ -31,7 +29,7 @@ $user = require_session($pdo);
 
 try {
     $pdo->beginTransaction();
-    $stmt = $pdo->prepare('SELECT creator_id, status FROM matches WHERE id = :id FOR UPDATE');
+    $stmt = $pdo->prepare('SELECT creator_id, status, max_players FROM matches WHERE id = :id FOR UPDATE');
     $stmt->execute([':id' => $match_id]);
     $match = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$match) {
@@ -49,44 +47,25 @@ try {
     if ($match['status'] !== 'waiting') {
         $pdo->rollBack();
         http_response_code(400);
-        echo json_encode(['error' => 'match not startable'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['error' => 'match not joinable'], JSON_UNESCAPED_UNICODE);
         exit;
     }
-    $stmt = $pdo->prepare('SELECT user_id, username, is_ai FROM match_players WHERE match_id = :mid');
+
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM match_players WHERE match_id = :mid FOR UPDATE');
     $stmt->execute([':mid' => $match_id]);
-    $players = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if (count($players) < 2) {
+    $count = (int)$stmt->fetchColumn();
+    if ($count >= (int)$match['max_players']) {
         $pdo->rollBack();
         http_response_code(400);
-        echo json_encode(['error' => 'not enough players'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['error' => 'match full'], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
-    $initial_state = [];
-    $result = create_game($pdo, $user['id'], $ruleset_id, $initial_state, $match_id, false);
-    $game_id = $result['game_id'];
-
-    $insert = $pdo->prepare('INSERT INTO game_players (game_id, user_id, username, is_ai) VALUES (:gid, :uid, :uname, :is_ai)');
-    foreach ($players as $p) {
-        $insert->execute([
-            ':gid' => $game_id,
-            ':uid' => $p['user_id'],
-            ':uname' => $p['username'],
-            ':is_ai' => $p['is_ai'],
-        ]);
-    }
-
-    $stmt = $pdo->prepare('UPDATE matches SET status = :status WHERE id = :id');
-    $stmt->execute([':status' => 'started', ':id' => $match_id]);
-
+    $aiName = 'AI Bot';
+    $insert = $pdo->prepare('INSERT INTO match_players (match_id, username, is_ai) VALUES (:mid, :name, 1)');
+    $insert->execute([':mid' => $match_id, ':name' => $aiName]);
     $pdo->commit();
-    echo json_encode(['game_id' => $game_id], JSON_UNESCAPED_UNICODE);
-} catch (RuntimeException $e) {
-    if ($pdo->inTransaction()) {
-        $pdo->rollBack();
-    }
-    http_response_code(400);
-    echo json_encode(['error' => 'invalid ruleset'], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['added' => true], JSON_UNESCAPED_UNICODE);
 } catch (Throwable $e) {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
@@ -94,3 +73,4 @@ try {
     http_response_code(500);
     echo json_encode(['error' => 'server error'], JSON_UNESCAPED_UNICODE);
 }
+
