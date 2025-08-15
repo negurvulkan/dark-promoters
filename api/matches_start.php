@@ -55,7 +55,16 @@ try {
     $stmt = $pdo->prepare('SELECT user_id, username, is_ai FROM match_players WHERE match_id = :mid');
     $stmt->execute([':mid' => $match_id]);
     $players = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if (count($players) < 2) {
+    $human_count = 0;
+    $ai_count = 0;
+    foreach ($players as $p) {
+        if (!empty($p['is_ai'])) {
+            $ai_count++;
+        } else {
+            $human_count++;
+        }
+    }
+    if ($human_count < 1 || $ai_count < 1) {
         $pdo->rollBack();
         http_response_code(400);
         echo json_encode(['error' => 'not enough players'], JSON_UNESCAPED_UNICODE);
@@ -63,14 +72,14 @@ try {
     }
 
     $initial_state = [];
-    $result = create_game($pdo, $user['id'], $ruleset_id, $initial_state, $match_id, false);
+    $result = create_game($pdo, $user['id'], $ruleset_id, $initial_state, $match_id, $ai_count);
     $game_id = $result['game_id'];
 
     $insert = $pdo->prepare('INSERT INTO game_players (game_id, user_id, username, is_ai) VALUES (:gid, :uid, :uname, :is_ai)');
     foreach ($players as $p) {
         $insert->execute([
             ':gid' => $game_id,
-            ':uid' => $p['user_id'],
+            ':uid' => !empty($p['is_ai']) ? null : $p['user_id'],
             ':uname' => $p['username'],
             ':is_ai' => $p['is_ai'],
         ]);
