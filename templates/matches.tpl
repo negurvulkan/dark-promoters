@@ -15,6 +15,7 @@
         <button type="submit" class="btn btn-primary w-100" data-i18n="create_match_button">Create Match</button>
       </div>
     </form>
+    <div id="matches_error" class="text-danger mb-3"></div>
     <table class="table table-dark table-striped">
       <thead>
         <tr>

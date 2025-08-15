@@ -10,18 +10,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.getElementById('match_name');
   const maxInput = document.getElementById('max_players');
   const creatorTpl = document.getElementById('creator_actions_template');
+  const errorDiv = document.getElementById('matches_error');
   let currentUser = null;
+
+  function showError(err) {
+    console.error(err);
+    if (errorDiv) {
+      errorDiv.textContent = String(err);
+    }
+  }
 
   async function loadMatches() {
     try {
       const res = await fetch('/api/matches_list.php', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      const json = await res.json();
+      if (!res.ok) {
+        showError(await res.text());
+        return;
+      }
+      const text = await res.text();
+      if (!text) {
+        return;
+      }
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch (err) {
+        showError(err);
+        return;
+      }
       currentUser = json.user_id;
+      if (errorDiv) {
+        errorDiv.textContent = '';
+      }
       render(json.matches || []);
     } catch (err) {
-      console.error(err);
+      showError(err);
     }
   }
 
@@ -55,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             loadMatches();
           } catch (err) {
-            console.error(err);
+            showError(err);
           }
         });
         tdActions.appendChild(joinBtn);
@@ -79,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
               });
               loadMatches();
             } catch (err) {
-              console.error(err);
+              showError(err);
             }
           });
         } else {
@@ -98,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             loadMatches();
           } catch (err) {
-            console.error(err);
+            showError(err);
           }
         });
         tdActions.appendChild(frag);
@@ -126,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
       nameInput.value = '';
       loadMatches();
     } catch (err) {
-      console.error(err);
+      showError(err);
     }
   });
 
