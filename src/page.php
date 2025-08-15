@@ -48,13 +48,13 @@ function render_page(string $template, array $vars = []): void {
     $nav_links = [];
     if ($user) {
         $nav_links = [
-            ['href' => 'public/inventory.php', 'key' => 'nav_inventory'],
-            ['href' => 'public/market.php', 'key' => 'nav_market'],
-            ['href' => 'public/deckbuilder.php', 'key' => 'nav_deckbuilder'],
-            ['href' => 'public/matches.php', 'key' => 'nav_matches'],
+            ['href' => './public/inventory.php', 'key' => 'nav_inventory'],
+            ['href' => './public/market.php', 'key' => 'nav_market'],
+            ['href' => './public/deckbuilder.php', 'key' => 'nav_deckbuilder'],
+            ['href' => './public/matches.php', 'key' => 'nav_matches'],
         ];
         if ($showAdmin) {
-            $nav_links[] = ['href' => 'public/admin.php', 'key' => 'nav_admin'];
+            $nav_links[] = ['href' => './public/admin.php', 'key' => 'nav_admin'];
         }
     }
     $smarty->assign('nav_links', $nav_links);
