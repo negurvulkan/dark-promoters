@@ -9,15 +9,15 @@
       <a href="{$link.href}" class="btn btn-primary me-2 mb-2" data-i18n="{$link.key}">{$link.text}</a>
       {/foreach}
       {if $show_admin}
-      <a id="admin_link" href="admin.php" class="btn btn-warning mb-2">Admin</a>
+      <a id="admin_link" href="public/admin.php" class="btn btn-warning mb-2">Admin</a>
       {/if}
     </div>
     {else}
     <div id="auth_links" class="mt-3">
-      <a href="login.php" class="btn btn-primary me-2" data-i18n="login_button">Login</a>
-      <a href="register.php" class="btn btn-secondary" data-i18n="register_button">Register</a>
+      <a href="public/login.php" class="btn btn-primary me-2" data-i18n="login_button">Login</a>
+      <a href="public/register.php" class="btn btn-secondary" data-i18n="register_button">Register</a>
     </div>
     {/if}
   </main>
 {/capture}
-{include file='layout.tpl' title=$title css=['cards.css'] scripts=['i18n.js','auth.js','app.js'] content=$smarty.capture.content}
+{include file='layout.tpl' title=$title css=['public/cards.css'] scripts=['public/i18n.js','public/auth.js','public/app.js'] content=$smarty.capture.content}
