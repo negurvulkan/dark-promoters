@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/_ruleset.php';
+require_once __DIR__ . '/../src/ai.php';
 
 /**
  * Load all card definitions from the /cards directory.
@@ -86,51 +87,16 @@ function apply_ai_turn(PDO $pdo, int $gameId, array $rules): ?array {
         return $state;
     }
 
-    $phase = $state['phase'] ?? '';
-    $aiHand = $state['ai_hand'] ?? [];
-    $allowedMap = [
-        'finance1' => ['sponsor'],
-        'location' => ['location'],
-        'booking1' => ['act'],
-        'marketing1' => ['marketing'],
-        'sabotage' => ['sabotage'],
-        'finance2' => ['sponsor'],
-        'booking2' => ['act'],
-        'marketing2' => ['marketing'],
-        'event' => [],
-        'game_over' => [],
-    ];
-    $allowed = $allowedMap[$phase] ?? [];
-
-    $playable = [];
-    foreach ($aiHand as $idx => $card) {
-        $type = is_array($card) ? ($card['type'] ?? '') : '';
-        if (in_array($type, $allowed, true)) {
-            $playable[$idx] = $card;
-        }
-    }
-
-    if ($playable) {
-        $idx = array_rand($playable);
-        $card = $playable[$idx];
-        $cardId = is_array($card) ? ($card['id'] ?? null) : $card;
-        $state['hand'] = $aiHand;
+    $cardId = choose_ai_card($state);
+    if ($cardId !== null) {
+        $state['hand'] = $state['ai_hand'] ?? [];
         $state = apply_action($state, ['type' => 'play', 'card' => $cardId], $rules);
         $state['ai_hand'] = $state['hand'];
         unset($state['hand']);
-        if (!empty($state['ai_deck'])) {
-            $draw = array_shift($state['ai_deck']);
-            if ($draw !== null) {
-                $state['ai_hand'][] = $draw;
-            }
-        }
+        draw_ai_hand($state);
         $state['log'][] = "ai play {$cardId}";
     } else {
-        $state['hand'] = $aiHand;
-        $state = apply_action($state, ['type' => 'next_phase'], $rules);
-        $state['ai_hand'] = $state['hand'];
-        unset($state['hand']);
-        $state['log'][] = 'ai next_phase';
+        next_ai_phase($state, $rules);
     }
 
     $state['version'] = $version + 1;
