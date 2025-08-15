@@ -6,15 +6,54 @@ declare(strict_types=1);
 require_once __DIR__ . '/_ruleset.php';
 
 /**
+ * Load all card definitions from the /cards directory.
+ * Cached for the duration of the request.
+ */
+function load_all_cards(): array {
+    static $cards = null;
+    if ($cards !== null) {
+        return $cards;
+    }
+    $cards = [];
+    $baseDir = realpath(__DIR__ . '/../cards');
+    if ($baseDir === false || !is_dir($baseDir)) {
+        return $cards;
+    }
+    $iter = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($baseDir));
+    foreach ($iter as $file) {
+        if (!$file->isFile() || strtolower($file->getExtension()) !== 'json') {
+            continue;
+        }
+        $data = json_decode(file_get_contents($file->getPathname()), true);
+        if (!is_array($data) || !isset($data['id'])) {
+            continue;
+        }
+        $cards[$data['id']] = $data;
+    }
+    return $cards;
+}
+
+/**
  * Create a new game row and return identifiers.
  * Caller must handle transactions.
  */
-function create_game(PDO $pdo, int $host_user_id, string $ruleset_id, array $initial_state, ?int $match_id = null): array {
+function create_game(PDO $pdo, int $host_user_id, string $ruleset_id, array $initial_state, ?int $match_id = null, bool $vs_ai = false): array {
     $loaded = load_ruleset($ruleset_id);
     $ruleset_id = $loaded['id'];
     $rules_snapshot = $loaded['data'];
 
     $initial_state['version'] = $initial_state['version'] ?? 0;
+
+    if ($vs_ai) {
+        $initial_state['ai_enabled'] = true;
+        $allCards = array_values(load_all_cards());
+        shuffle($allCards);
+        $initial_state['ai_deck'] = $allCards;
+        $initial_state['ai_hand'] = [];
+        for ($i = 0; $i < 5 && $initial_state['ai_deck']; $i++) {
+            $initial_state['ai_hand'][] = array_shift($initial_state['ai_deck']);
+        }
+    }
 
     $stmt = $pdo->prepare('INSERT INTO games (host_user_id, state_json, version, ruleset_id, rules_json_snapshot, match_id) VALUES (:host, :state, 0, :ruleset, :rules, :match) RETURNING id');
     $stmt->execute([

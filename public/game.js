@@ -1,10 +1,7 @@
 (async function() {
   const params = new URLSearchParams(location.search);
-  const gameId = parseInt(params.get('game_id'), 10);
-  if (!gameId) {
-    console.error('missing game_id');
-    return;
-  }
+  let gameId = parseInt(params.get('game_id'), 10);
+  const vsAi = params.get('vs_ai') === '1';
 
   const tableEl = document.getElementById('table');
   const handEl = document.getElementById('player-hand');
@@ -14,6 +11,7 @@
 
   let expectedVersion = 0;
   let currentState = null;
+  let initialStateLoaded = false;
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -172,7 +170,41 @@
       renderState(currentState);
     }
   });
+  if (!gameId && vsAi) {
+    try {
+      const res = await fetch('/api/new_game.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          host_user_id: 1,
+          ruleset_id: 'default.latest',
+          mode: 'club',
+          state: {},
+          vs_ai: true
+        })
+      });
+      const data = await res.json();
+      gameId = data.game_id;
+      if (data.state) {
+        expectedVersion = data.state.version || 0;
+        renderState(data.state);
+        initialStateLoaded = true;
+      }
+      const newUrl = `game.php?game_id=${gameId}&vs_ai=1`;
+      window.history.replaceState(null, '', newUrl);
+    } catch (e) {
+      console.error('Failed to create AI game', e);
+      return;
+    }
+  }
 
-  await loadState();
+  if (!gameId) {
+    console.error('missing game_id');
+    return;
+  }
+
+  if (!initialStateLoaded) {
+    await loadState();
+  }
   initStream();
 })();
