@@ -9,6 +9,34 @@ header('Content-Type: application/json');
 $pdo = db();
 $user = require_session($pdo);
 
+/**
+ * Load all valid card IDs from the /cards directory.
+ * Cached per request to avoid repeated filesystem scans.
+ */
+function load_card_ids(): array {
+    static $ids = null;
+    if ($ids !== null) {
+        return $ids;
+    }
+    $ids = [];
+    $baseDir = realpath(__DIR__ . '/../cards');
+    if ($baseDir === false || !is_dir($baseDir)) {
+        return $ids;
+    }
+    $iter = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($baseDir));
+    foreach ($iter as $file) {
+        if (!$file->isFile() || strtolower($file->getExtension()) !== 'json') {
+            continue;
+        }
+        $data = json_decode(file_get_contents($file->getPathname()), true);
+        if (!is_array($data) || !isset($data['id'])) {
+            continue;
+        }
+        $ids[$data['id']] = true;
+    }
+    return $ids;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt = $pdo->prepare('SELECT points FROM users WHERE id = ?');
     $stmt->execute([$user['id']]);
@@ -39,6 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($card_id === '') {
         http_response_code(400);
         echo json_encode(['error' => 'missing card_id']);
+        exit;
+    }
+    $cardIds = load_card_ids();
+    if (!preg_match('/^[a-z0-9_]+$/', $card_id) || !isset($cardIds[$card_id])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'invalid card_id']);
         exit;
     }
     if ($qty > 0) {
