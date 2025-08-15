@@ -108,14 +108,21 @@ Winner receives **100** community points (ruleset `global.winReward`).
 
 ---
 
-## 8) Modes & Reference Values (realistic ranges)
+## 8) Game Modes & Key Parameters
 
-### 8.1 Clubnight
-- **Rounds:** **2** (30–45 min)
-- **Start Budget:** **€8,000**
-- **Ticket Price:** **€15**
-- **Audience Base:** **150**
-- **Sponsor /slot:** **€400–800**
+All numeric dials live in versioned ruleset JSON files. The default alias
+[`rulesets/default.latest`](rulesets/default.latest) currently points to
+[`rulesets/default.v2.json`](rulesets/default.v2.json). Each game stores a
+snapshot of the chosen ruleset, so keep the values below in sync when the ruleset
+version changes.
+
+### 8.1 Clubnight (`modes.club`)
+- **Rounds:** **2** — quick format; only one full cycle before scoring.
+- **Start Budget:** **€8,000** — tight funds keep acts and marketing modest.
+- **Ticket Price:** **€15** — baseline for selecting a price band in Marketing R1.
+- **Audience Base:** **150** — small crowd; acts and marketing scale from here.
+- **Marketing Cap:** **+60%** — limits total promotion, rewarding strong lineups.
+- **Sponsor /slot:** **€400–800** — typical payout range per slot.
 
 **Locations (rent → cap):**  
 Kellerclub €1,000–1,500 → 200–250  
@@ -135,12 +142,13 @@ Influencer collab €500 → +8%
 
 ---
 
-### 8.2 Party (1 Headliner + Support)
-- **Rounds:** **2** (optional **Teaser window** before R1)
-- **Start Budget:** **€20,000**
-- **Ticket Price:** **€28** (25–30)
-- **Audience Base:** **300**
-- **Sponsor /slot:** **€700–1,500**
+### 8.2 Party (1 Headliner + Support) (`modes.party`)
+- **Rounds:** **2** with optional **Teaser window** before R1 — quick event with a bonus pre-phase choice.
+- **Start Budget:** **€20,000** — enough to secure a headliner and solid venue.
+- **Ticket Price:** **€28** (25–30) — baseline before applying price-band modifiers.
+- **Audience Base:** **300** — midsize crowd; multipliers build from here.
+- **Marketing Cap:** **+60%** — promotional gains are capped to keep balance with acts.
+- **Sponsor /slot:** **€700–1,500** — typical payout range per slot.
 
 **Locations:**  
 Hall M €5–8k → 800–1,200  
@@ -164,12 +172,13 @@ Before Phase 1, each player chooses exactly one:
 
 ---
 
-### 8.3 One-Day Festival
-- **Rounds:** **3** (**Round 3 = Last Call**: Booking → Marketing → Sabotage; **no** Finance/Sponsors)
-- **Start Budget:** **€90,000**
-- **Ticket Price:** **€69** (55–79)
-- **Audience Base:** **800**
-- **Sponsor /slot:** **€1,500–3,000**
+### 8.3 One-Day Festival (`modes.1day`)
+- **Rounds:** **3** — **Round 3** is **Last Call** (Booking → Marketing → Sabotage; **no** Finance), creating a late push.
+- **Start Budget:** **€90,000** — substantial funds for multiple mid-tier acts.
+- **Ticket Price:** **€69** (55–79) — baseline for price-band selection.
+- **Audience Base:** **800** — large starting crowd.
+- **Marketing Cap:** **+90%** — allows aggressive promotion.
+- **Sponsor /slot:** **€1,500–3,000** — typical payout range.
 
 **Locations (package incl. basics):**  
 Ground S €30k → cap 2,500  
@@ -190,12 +199,13 @@ Early-bird push €1.5k → +10%
 
 ---
 
-### 8.4 Two-Day Festival
-- **Rounds:** **3** (**Last Call** like above)
-- **Start Budget:** **€160,000**
-- **Ticket Price (2-day):** **€119** (95–140)
-- **Audience Base:** **1,500**
-- **Sponsor /slot:** **€2,500–5,000**
+### 8.4 Two-Day Festival (`modes.2day`)
+- **Rounds:** **3** — includes **Last Call** round for final bookings.
+- **Start Budget:** **€160,000** — bankroll for two full days.
+- **Ticket Price (2-day):** **€119** (95–140) — baseline for the pass.
+- **Audience Base:** **1,500** — per-day starting crowd.
+- **Marketing Cap:** **+90%** — high ceiling for promotion.
+- **Sponsor /slot:** **€2,500–5,000** — typical payout range.
 
 **Locations (festival package):**  
 Ground M €90k → cap 5,000/day  
