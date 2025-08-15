@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title data-i18n="login_title">Login</title>
-</head>
-<body>
-  <header>
-    <label for="lang-switch" data-i18n="language_label">Language:</label>
-    <select id="lang-switch">
-      <option value="en">EN</option>
-      <option value="de">DE</option>
-    </select>
-  </header>
-  <h1 data-i18n="login_title">Login</h1>
+{assign var='title' value='Login'}
+{capture name='content'}
+  <h1 data-i18n="login_title">{$title}</h1>
   <form id="login_form">
     <label><span data-i18n="username_label">Username:</span>
       <input type="text" name="username" required>
@@ -25,7 +13,5 @@
     <button type="submit" data-i18n="login_button">Login</button>
   </form>
   <p><span data-i18n="no_account">No account?</span> <a href="register.html" data-i18n="register_link">Register</a></p>
-  <script src="i18n.js"></script>
-  <script src="auth.js"></script>
-</body>
-</html>
+{/capture}
+{include file='layout.tpl' title=$title scripts=['i18n.js','auth.js'] content=$smarty.capture.content}
