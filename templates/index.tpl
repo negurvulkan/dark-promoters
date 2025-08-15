@@ -9,13 +9,13 @@
       <a href="{$link.href}" data-i18n="{$link.key}">{$link.text}</a>
       {/foreach}
       {if $show_admin}
-      <a id="admin_link" href="admin.html">Admin</a>
+      <a id="admin_link" href="admin.php">Admin</a>
       {/if}
     </p>
     {else}
     <p id="auth_links">
-      <a href="login.html" data-i18n="login_button">Login</a>
-      <a href="register.html" data-i18n="register_button">Register</a>
+      <a href="login.php" data-i18n="login_button">Login</a>
+      <a href="register.php" data-i18n="register_button">Register</a>
     </p>
     {/if}
   </main>

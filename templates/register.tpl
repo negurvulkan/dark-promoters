@@ -12,6 +12,6 @@
     <br>
     <button type="submit" data-i18n="register_button">Register</button>
   </form>
-  <p><span data-i18n="already_have_account">Already have an account?</span> <a href="login.html" data-i18n="login_link">Login</a></p>
+  <p><span data-i18n="already_have_account">Already have an account?</span> <a href="login.php" data-i18n="login_link">Login</a></p>
 {/capture}
 {include file='layout.tpl' title=$title scripts=['i18n.js','auth.js'] content=$smarty.capture.content}

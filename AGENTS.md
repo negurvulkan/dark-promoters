@@ -17,7 +17,7 @@ This document splits the work into clear roles so humans (and code agents) can c
 - **Acceptance:** `api/cards.php` returns stable structure; invalid cards skipped with warnings; per-card files OK.
 
 ### 3) Frontend Renderer
-- **Owns:** `/public/index.html`, `cards.css`, `app.js`.
+- **Owns:** `/public/index.php`, `cards.css`, `app.js`.
 - **Tasks:** Render MTG-like frames; EN/DE toggle; lazy-load art; later drag/drop onto table.
 - **Acceptance:** Cards display with frame/bg/art/title/type/rules/rarity; locale switch updates text; no layout regressions.
 

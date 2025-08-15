@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const json = await sendAuth('/api/login.php', payload);
         if (json.session_token) {
           localStorage.setItem('session_token', json.session_token);
-          window.location.href = 'index.html';
+          window.location.href = 'index.php';
         } else {
           alert(json.error || (window.i18n ? window.i18n.t('login_failed') : 'Login failed'));
         }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const json = await sendAuth('/api/register.php', payload);
         if (json.session_token) {
           localStorage.setItem('session_token', json.session_token);
-          window.location.href = 'index.html';
+          window.location.href = 'index.php';
         } else {
           alert(json.error || (window.i18n ? window.i18n.t('registration_failed') : 'Registration failed'));
         }
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error(err);
       } finally {
         localStorage.removeItem('session_token');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
       }
     });
   }

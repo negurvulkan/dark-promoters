@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('session_token');
   if (!token) {
-    window.location.href = 'login.html';
+    window.location.href = 'login.php';
     return;
   }
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const json = await res.json().catch(() => ({}));
       if (!res.ok || json.error) {
         if (res.status === 401) {
-          window.location.href = 'login.html';
+          window.location.href = 'login.php';
         } else {
           alert(json.error || (window.i18n ? window.i18n.t('load_failed') : 'Failed to load market'));
         }

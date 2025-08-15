@@ -23,7 +23,7 @@ For detailed onboarding steps see `docs/ONBOARDING.md`.
 /cards/        # one JSON per card
 /starter_decks/# sample starter decks
 /i18n/        # ui.en.json, ui.de.json (UI strings)
-/public/       # index.html, cards.css, app.js
+/public/       # index.php, cards.css, app.js
 /docs/         # RULES.md (EN), RULES.de.md (DE), ONBOARDING.md, CONTRIBUTING.md, AGENTS.md
 /migrations/   # SQL schema migrations
 /rulesets/     # versioned ruleset JSON
@@ -116,13 +116,13 @@ Inventory & Deck Building APIs
 
 Frontend pages & example flow
 
-    - `/public/register.html` – create account
-    - `/public/login.html` – sign in
-    - `/public/market.html` – buy packs
-    - `/public/inventory.html` – view owned cards
-    - `/public/deckbuilder.html` – assemble decks
-    - `/public/index.html` – play a game
-    - `/public/admin.html` – admin dashboard for user/points management (requires admin account)
+    - `/public/register.php` – create account
+    - `/public/login.php` – sign in
+    - `/public/market.php` – buy packs
+    - `/public/inventory.php` – view owned cards
+    - `/public/deckbuilder.php` – assemble decks
+    - `/public/index.php` – play a game
+    - `/public/admin.php` – admin dashboard for user/points management (requires admin account)
 
   Example: register → log in → buy a starter pack → check new cards in inventory → build a deck → start a game.
 
