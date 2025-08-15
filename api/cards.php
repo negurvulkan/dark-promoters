@@ -3,6 +3,8 @@
 
 declare(strict_types=1);
 
+$smarty = require __DIR__ . '/../src/bootstrap.php';
+
 header('Content-Type: application/json');
 
 $baseDir = realpath(__DIR__ . '/../cards');

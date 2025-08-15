@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+$smarty = require __DIR__ . '/../src/bootstrap.php';
+
 require_once __DIR__ . '/_auth.php';
 require_once __DIR__ . '/_points.php';
 require_once __DIR__ . '/../db.php';
