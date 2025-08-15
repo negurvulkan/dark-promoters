@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
           credentials: 'same-origin',
           body: JSON.stringify({ pack_id: id })
         });
-      const json = await res.json();
-      if (json.error) {
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.error) {
         alert(json.error || (window.i18n ? window.i18n.t('purchase_failed') : 'Purchase failed'));
         return;
       }
