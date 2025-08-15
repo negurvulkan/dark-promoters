@@ -8,10 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const inventoryDiv = document.getElementById('inventory_list');
   const deckDiv = document.getElementById('deck_list');
   const deckNameInput = document.getElementById('deck_name');
+  const deckListSelect = document.getElementById('deck_list_select');
   const saveBtn = document.getElementById('save_btn');
 
   let inventory = [];
   const deck = {};
+  let currentDeckId = null;
 
   async function loadInventory() {
     try {
@@ -67,6 +69,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  async function loadDecks() {
+    try {
+      const res = await fetch('/api/decks.php', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const json = await res.json();
+      deckListSelect.innerHTML = '';
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.textContent = 'New Deck';
+      deckListSelect.appendChild(opt);
+      (json.decks || []).forEach(d => {
+        const o = document.createElement('option');
+        o.value = d.id;
+        o.textContent = `${d.name} (${d.card_count})`;
+        deckListSelect.appendChild(o);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  deckListSelect.addEventListener('change', async () => {
+    const id = deckListSelect.value;
+    if (!id) {
+      currentDeckId = null;
+      deckNameInput.value = '';
+      Object.keys(deck).forEach(k => delete deck[k]);
+      renderDeck();
+      return;
+    }
+    try {
+      const res = await fetch(`/api/decks.php?id=${id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const json = await res.json();
+      currentDeckId = json.id;
+      deckNameInput.value = json.name || '';
+      Object.keys(deck).forEach(k => delete deck[k]);
+      (json.cards || []).forEach(c => {
+        deck[c.card_id] = c.qty;
+      });
+      renderDeck();
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   saveBtn.addEventListener('click', async () => {
     const name = deckNameInput.value.trim();
     const cards = Object.entries(deck).map(([cid, qty]) => ({ card_id: cid, qty }));
@@ -74,14 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Name required');
       return;
     }
+    const method = currentDeckId ? 'PUT' : 'POST';
+    const body = currentDeckId ? { id: currentDeckId, name, cards } : { name, cards };
     try {
       const res = await fetch('/api/decks.php', {
-        method: 'POST',
+        method,
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, cards })
+        body: JSON.stringify(body)
       });
       const json = await res.json();
       if (json.error) {
@@ -90,7 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Deck saved');
         Object.keys(deck).forEach(k => delete deck[k]);
         deckNameInput.value = '';
+        currentDeckId = null;
         renderDeck();
+        loadDecks();
+        deckListSelect.value = '';
       }
     } catch (err) {
       console.error(err);
@@ -98,4 +153,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadInventory();
+  loadDecks();
 });
