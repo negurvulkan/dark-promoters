@@ -6,6 +6,7 @@
   "inventory_title": "Inventar",
   "logout_button": "Abmelden",
   "filter_placeholder": "Karten filtern",
+  "card_name_header": "Kartenname",
   "card_id_header": "Karten-ID",
   "quantity_header": "Menge",
   "login_title": "Anmelden",

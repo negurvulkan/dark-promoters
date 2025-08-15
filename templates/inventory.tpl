@@ -8,7 +8,7 @@
     <input type="text" id="filter" class="form-control mb-3" data-i18n-placeholder="filter_placeholder" placeholder="Filter cards">
     <table class="table table-dark table-striped">
       <thead>
-        <tr><th data-i18n="card_id_header">Card ID</th><th data-i18n="quantity_header">Quantity</th></tr>
+        <tr><th data-i18n="card_name_header">Card</th><th data-i18n="quantity_header">Quantity</th></tr>
       </thead>
       <tbody id="inventory_body"></tbody>
     </table>

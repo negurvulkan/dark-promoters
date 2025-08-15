@@ -6,6 +6,7 @@
   "inventory_title": "Inventory",
   "logout_button": "Logout",
   "filter_placeholder": "Filter cards",
+  "card_name_header": "Card",
   "card_id_header": "Card ID",
   "quantity_header": "Quantity",
   "login_title": "Login",
