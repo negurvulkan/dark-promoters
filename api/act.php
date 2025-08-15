@@ -6,6 +6,7 @@ declare(strict_types=1);
 $smarty = require __DIR__ . '/../src/bootstrap.php';
 
 require_once __DIR__ . '/update_game.php';
+require_once __DIR__ . '/_game.php';
 require_once __DIR__ . '/../db.php';
 
 header('Content-Type: application/json');
@@ -183,6 +184,12 @@ try {
     $new_state = apply_action($state, $action, $rules);
     $new_state['version'] = $state['version'] + 1;
     update_game_state($pdo, $game_id, $expected_version, $new_state);
+    if (!empty($new_state['ai_enabled'])) {
+        $ai_state = apply_ai_turn($pdo, $game_id, $rules);
+        if (is_array($ai_state)) {
+            $new_state = $ai_state;
+        }
+    }
     echo json_encode(['state' => $new_state], JSON_UNESCAPED_UNICODE);
 } catch (RuntimeException $e) {
     if ($e->getMessage() === 'Version mismatch') {

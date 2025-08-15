@@ -28,3 +28,73 @@ function create_game(PDO $pdo, int $host_user_id, string $ruleset_id, array $ini
 
     return ['game_id' => $game_id, 'state' => $initial_state];
 }
+
+/**
+ * Let the simple AI perform a turn.
+ * Chooses a random playable card or ends the phase and persists state.
+ */
+function apply_ai_turn(PDO $pdo, int $gameId, array $rules): ?array {
+    $stmt = $pdo->prepare('SELECT state_json, version FROM games WHERE id = ?');
+    $stmt->execute([$gameId]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$row) {
+        return null;
+    }
+
+    $state = json_decode($row['state_json'], true);
+    $version = (int)$row['version'];
+    if (empty($state['ai_enabled'])) {
+        return $state;
+    }
+
+    $phase = $state['phase'] ?? '';
+    $aiHand = $state['ai_hand'] ?? [];
+    $allowedMap = [
+        'finance1' => ['sponsor'],
+        'location' => ['location'],
+        'booking1' => ['act'],
+        'marketing1' => ['marketing'],
+        'sabotage' => ['sabotage'],
+        'finance2' => ['sponsor'],
+        'booking2' => ['act'],
+        'marketing2' => ['marketing'],
+        'event' => [],
+        'game_over' => [],
+    ];
+    $allowed = $allowedMap[$phase] ?? [];
+
+    $playable = [];
+    foreach ($aiHand as $idx => $card) {
+        $type = is_array($card) ? ($card['type'] ?? '') : '';
+        if (in_array($type, $allowed, true)) {
+            $playable[$idx] = $card;
+        }
+    }
+
+    if ($playable) {
+        $idx = array_rand($playable);
+        $card = $playable[$idx];
+        $cardId = is_array($card) ? ($card['id'] ?? null) : $card;
+        $state['hand'] = $aiHand;
+        $state = apply_action($state, ['type' => 'play', 'card' => $cardId], $rules);
+        $state['ai_hand'] = $state['hand'];
+        unset($state['hand']);
+        if (!empty($state['ai_deck'])) {
+            $draw = array_shift($state['ai_deck']);
+            if ($draw !== null) {
+                $state['ai_hand'][] = $draw;
+            }
+        }
+        $state['log'][] = "ai play {$cardId}";
+    } else {
+        $state['hand'] = $aiHand;
+        $state = apply_action($state, ['type' => 'next_phase'], $rules);
+        $state['ai_hand'] = $state['hand'];
+        unset($state['hand']);
+        $state['log'][] = 'ai next_phase';
+    }
+
+    $state['version'] = $version + 1;
+    update_game_state($pdo, $gameId, $version, $state);
+    return $state;
+}
