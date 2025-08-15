@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+$smarty = require __DIR__ . '/../../src/bootstrap.php';
+
 if (!function_exists('db')) {
     require_once __DIR__ . '/../../db.php';
 }

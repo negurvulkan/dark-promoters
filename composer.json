@@ -1,0 +1,6 @@
+{
+    "name": "dark-promoters/dark-promoters",
+    "require": {
+        "smarty/smarty": "^5.5"
+    }
+}

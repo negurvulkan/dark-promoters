@@ -5,6 +5,8 @@
 
 declare(strict_types=1);
 
+$smarty = require __DIR__ . '/../src/bootstrap.php';
+
 require_once __DIR__ . '/../db.php';
 
 header('Content-Type: text/event-stream');

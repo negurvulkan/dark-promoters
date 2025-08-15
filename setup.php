@@ -1,4 +1,6 @@
 <?php
+$smarty = require __DIR__ . '/src/bootstrap.php';
+
 // Setup script to configure database and run migrations via CLI or web form
 
 function performSetup(string $host, string $port, string $name, string $user, string $pass): string {

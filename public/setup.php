@@ -1,4 +1,6 @@
 <?php
+$smarty = require __DIR__ . '/../src/bootstrap.php';
+
 // Web-based setup script to configure database and run migrations
 $default = [
     'db_host' => 'localhost',
