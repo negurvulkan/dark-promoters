@@ -17,6 +17,23 @@ Players compete for **Locations, Acts, Sponsors, Marketing** and **Audience**. A
 
 For detailed onboarding steps see `docs/ONBOARDING.md`.
 
+## Using Smarty templates
+
+### Installation
+
+Run `composer install` to fetch dependencies, including [Smarty](https://www.smarty.net/).
+
+### Directory structure
+
+- `/templates/` – view templates (`.tpl` files)
+- `/templates_c/` – compiled templates, generated automatically
+
+### Creating a new view
+
+1. Create a template in `/templates`, e.g. `example.tpl`.
+2. In your PHP script, load Smarty via `require __DIR__ . '/../src/bootstrap.php';`.
+3. Assign variables with `$smarty->assign('name', $value);` and render with `$smarty->display('example.tpl');`.
+
 ## Repository Layout (proposed)
 
 /api/          # PHP endpoints (state, actions, cards loader, SSE)
