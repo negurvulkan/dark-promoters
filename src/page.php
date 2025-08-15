@@ -54,7 +54,7 @@ function render_page(string $template, array $vars = []): void {
             ['href' => '../public/matches.php', 'key' => 'nav_matches'],
         ];
         if ($showAdmin) {
-            $nav_links[] = ['href' => './public/admin.php', 'key' => 'nav_admin'];
+            $nav_links[] = ['href' => '../public/admin.php', 'key' => 'nav_admin'];
         }
     }
     $smarty->assign('nav_links', $nav_links);
