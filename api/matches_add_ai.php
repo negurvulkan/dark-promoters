@@ -70,7 +70,13 @@ try {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
+    error_log('matches_add_ai: ' . $e->getMessage());
+    error_log($e->getTraceAsString());
     http_response_code(500);
-    echo json_encode(['error' => 'server error'], JSON_UNESCAPED_UNICODE);
+    $response = ['error' => 'server error'];
+    if (getenv('APP_ENV') === 'development') {
+        $response['message'] = $e->getMessage();
+    }
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
 }
 
