@@ -62,7 +62,10 @@ try {
     }
 
     $aiName = 'AI Bot';
-    $insert = $pdo->prepare('INSERT INTO match_players (match_id, username, is_ai) VALUES (:mid, :name, 1)');
+    $insert = $pdo->prepare(
+        'INSERT INTO match_players (match_id, user_id, username, is_ai)
+         VALUES (:mid, NULL, :name, 1)'
+    );
     $insert->execute([':mid' => $match_id, ':name' => $aiName]);
     $pdo->commit();
     echo json_encode(['added' => true], JSON_UNESCAPED_UNICODE);
